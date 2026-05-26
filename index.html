@@ -1,1773 +1,266 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html class="light" lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Red Balloon - Dashboard Consolidado</title>
-  
-  <!-- CSS Link -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- Material Symbols for Premium Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-</head>
-<body>
-
-  <div class="app-shell">
-    
-    <!-- Mobile Header -->
-    <header class="mobile-header" id="mobileHeader">
-      <div class="mobile-header-content">
-        <div class="mobile-logo-group">
-          <span class="material-icons menu-trigger">menu</span>
-          <h1 id="mobileHeaderTitle">Red Balloon</h1>
-        </div>
-        <div class="profile-avatar">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" alt="Avatar">
-        </div>
-      </div>
-    </header>
-
-    <!-- Sidebar Navigation (Desktop) -->
-    <nav class="sidebar">
-      <div class="sidebar-header">
-        <div class="logo-container">
-          <span class="material-icons" style="font-size: 28px;">school</span>
-        </div>
-        <div class="brand-info">
-          <h2>RB Academy</h2>
-          <p>ADMIN CONSOLE</p>
-        </div>
-      </div>
-      
-      <div class="sidebar-menu">
-        <a href="#" class="nav-item active" data-target="view-home">
-          <span class="material-icons">dashboard</span>
-          Dashboard
-        </a>
-        <a href="#" class="nav-item" data-target="view-retention">
-          <span class="material-icons">analytics</span>
-          Insights
-        </a>
-        <a href="#" class="nav-item" data-target="view-events">
-          <span class="material-icons">payments</span>
-          Eventos & ROI
-        </a>
-        <a href="#" class="nav-item" data-target="view-nps">
-          <span class="material-icons">star</span>
-          Experiência & NPS
-        </a>
-        <a href="#" class="nav-item" data-target="view-data">
-          <span class="material-icons">database</span>
-          Gestão de Dados
-        </a>
-      </div>
-      
-      <div class="sidebar-footer">
-        <a href="#" class="nav-item">
-          <span class="material-icons">settings</span>
-          Configurações
-        </a>
-        <a href="#" class="nav-item">
-          <span class="material-icons">logout</span>
-          Sair
-        </a>
-      </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <div class="content-container">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login - Portal de Gestão</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Supabase Client JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- App Configurations -->
+    <script src="config.js"></script>
+    <script src="login.js" defer></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dfe2ea",
+                    "on-tertiary": "#ffffff",
+                    "text-muted": "#606080",
+                    "on-secondary-fixed": "#0c006a",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#5c4300",
+                    "inverse-on-surface": "#eef1f9",
+                    "tertiary-container": "#966e00",
+                    "surface-container-highest": "#dfe2ea",
+                    "primary-container": "#e71520",
+                    "on-primary-fixed-variant": "#93000d",
+                    "on-primary-fixed": "#410002",
+                    "secondary-container": "#8a89fe",
+                    "on-tertiary-fixed": "#261900",
+                    "surface": "#f8f9ff",
+                    "text-primary": "#1A1A1A",
+                    "secondary-fixed-dim": "#c2c1ff",
+                    "on-surface": "#181c21",
+                    "secondary": "#514fc1",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#e2dfff",
+                    "data-blue": "#3531A5",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary-container": "#1d1391",
+                    "on-background": "#181c21",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary-fixed-dim": "#f9bd2c",
+                    "outline": "#936e6a",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "outline-variant": "#e8bcb7",
+                    "on-primary-container": "#fffbff",
+                    "on-surface-variant": "#5e3f3c",
+                    "on-secondary": "#ffffff",
+                    "data-yellow": "#FABE2D",
+                    "inverse-surface": "#2c3137",
+                    "tertiary-fixed": "#ffdea1",
+                    "surface-container-high": "#e5e8f0",
+                    "tertiary": "#775700",
+                    "data-red": "#ED1C24",
+                    "surface-card": "#FFFFFF",
+                    "primary-fixed": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3935a8",
+                    "background": "#f8f9ff",
+                    "primary": "#bb0013",
+                    "surface-container": "#ebeef6",
+                    "inverse-primary": "#ffb4ab",
+                    "surface-tint": "#c00014",
+                    "surface-dim": "#d7dae2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "metric-xl": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "metric-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
         
-        <!-- ============================================== -->
-        <!-- VIEW 1: HOME / VISÃO GERAL                     -->
-        <!-- ============================================== -->
-        <div id="view-home" class="view-section active">
-          
-          <!-- Desktop Page Header -->
-          <div class="page-header">
-            <div class="page-title">
-              <h2>Visão Geral</h2>
-              <p>Acompanhamento consolidado da rede Red Balloon.</p>
-            </div>
-            <div class="header-actions">
-              <button class="btn btn-secondary">
-                <span class="material-icons" style="font-size: 18px;">calendar_today</span>
-                Este Mês
-              </button>
-              <button class="btn btn-primary">
-                <span class="material-icons" style="font-size: 18px;">download</span>
-                Exportar Relatório
-              </button>
-            </div>
-          </div>
+        /* Subtle animated gradient background for the non-image area on desktop */
+        .animated-bg {
+            background: linear-gradient(-45deg, #f8f9ff, #f0f4fb, #e5e8f0, #ffffff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
 
-          <!-- DESKTOP WORKSPACE LAYOUT (Visible on Desktop) -->
-          <div class="desktop-only-grid dashboard-grid">
-            
-            <!-- KPI 1: Alunos Matriculados -->
-            <div class="card kpi-card tertiary-accent">
-              <div class="kpi-header">
-                <h3>Alunos Matriculados</h3>
-                <span class="material-icons kpi-icon">school</span>
-              </div>
-              <div class="kpi-value">14.250</div>
-              <div class="kpi-trend trend-up">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>+4.2% vs. mês anterior</span>
-              </div>
-            </div>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex items-center justify-center font-body-md animated-bg relative overflow-hidden">
+    <!-- Form Section (Centered) -->
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg border border-surface-variant p-8 md:p-10 z-10">
+        <!-- Brand Logo -->
+        <div class="text-center mb-10">
+            <h1 class="font-headline-lg text-headline-lg font-extrabold text-data-red tracking-tight">RED BALLOON EXECUTIVE</h1>
+        </div>
+        <!-- Form Header -->
+        <div class="mb-8">
+            <h2 class="font-headline-md text-headline-md text-text-primary mb-2">Portal de Gestão</h2>
+            <p class="font-body-md text-body-md text-text-muted">Acesse o Painel de Resultados</p>
+        </div>
+        
+        <!-- Alert Container -->
+        <div id="alert-container" class="hidden mb-6 rounded-lg p-4 text-sm font-medium border transition-all duration-200"></div>
 
-            <!-- KPI 2: Novas Matrículas -->
-            <div class="card kpi-card primary-accent">
-              <div class="kpi-header">
-                <h3>Novas Matrículas</h3>
-                <span class="material-icons kpi-icon">person_add</span>
-              </div>
-              <div class="kpi-value">845</div>
-              <div class="kpi-trend trend-up">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>+12.5% vs. mês anterior</span>
-              </div>
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-6">
+            <!-- Email Input -->
+            <div>
+                <label class="block font-label-md text-label-md text-text-muted mb-2" for="email">E-mail corporativo</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined text-text-muted text-[20px]">mail</span>
+                    </div>
+                    <input class="block w-full pl-10 pr-3 py-3 border border-surface-variant rounded-lg bg-surface focus:ring-2 focus:ring-data-blue focus:border-data-blue transition-colors text-text-primary placeholder-text-muted/50 font-body-md" id="email" name="email" placeholder="nome@redballoon.com.br" required="" type="email"/>
+                </div>
             </div>
-
-            <!-- KPI 3: Receita Prevista -->
-            <div class="card kpi-card yellow-accent">
-              <div class="kpi-header">
-                <h3>Receita Prevista</h3>
-                <span class="material-icons kpi-icon">attach_money</span>
-              </div>
-              <div class="kpi-value">R$ 4.2M</div>
-              <div class="kpi-trend trend-neutral">
-                <span class="material-icons" style="font-size: 16px;">trending_flat</span>
-                <span>Dentro da meta</span>
-              </div>
+            <!-- Password Input -->
+            <div>
+                <label class="block font-label-md text-label-md text-text-muted mb-2" for="password">Senha</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined text-text-muted text-[20px]">lock</span>
+                    </div>
+                    <input class="block w-full pl-10 pr-10 py-3 border border-surface-variant rounded-lg bg-surface focus:ring-2 focus:ring-data-blue focus:border-data-blue transition-colors text-text-primary placeholder-text-muted/50 font-body-md" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+                    <!-- Toggle Password Visibility -->
+                    <button class="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-data-blue transition-colors focus:outline-none" type="button" id="toggle-password">
+                        <span class="material-symbols-outlined text-[20px]" id="password-toggle-icon">visibility_off</span>
+                    </button>
+                </div>
             </div>
-
-            <!-- Main Chart Area -->
-            <div class="card chart-card">
-              <div class="chart-card-header">
-                <h3>Crescimento de Matrículas (YTD)</h3>
-                <button class="chart-menu-btn">
-                  <span class="material-icons">more_vert</span>
+            <!-- Actions Row -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input class="h-4 w-4 text-data-blue focus:ring-data-blue border-surface-variant rounded" id="remember-me" name="remember-me" type="checkbox"/>
+                    <label class="ml-2 block font-body-md text-body-md text-text-muted" for="remember-me">
+                        Lembrar de mim
+                    </label>
+                </div>
+                <div class="text-sm">
+                    <a class="font-label-md text-label-md text-data-blue hover:text-secondary transition-colors" href="#">
+                        Esqueci minha senha
+                    </a>
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div>
+                <button class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm font-label-md text-label-md text-white bg-data-red hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-data-red transition-all duration-200 transform hover:-translate-y-0.5 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed" type="submit" id="submit-btn">
+                    <span id="submit-text">Entrar</span>
+                    <span class="material-symbols-outlined ml-2 text-[20px]" id="submit-icon">login</span>
                 </button>
-              </div>
-              <div class="chart-container">
-                <!-- Animated SVG Line Chart -->
-                <svg viewBox="0 0 500 220" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="chart-area-grad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="var(--deep-blue-light)" stop-opacity="0.22" />
-                      <stop offset="100%" stop-color="var(--deep-blue-light)" stop-opacity="0.0" />
-                    </linearGradient>
-                  </defs>
-                  
-                  <!-- Grid Lines -->
-                  <line x1="0" y1="40" x2="500" y2="40" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="90" x2="500" y2="90" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="140" x2="500" y2="140" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="190" x2="500" y2="190" stroke="var(--border-color)" stroke-width="1" />
-                  
-                  <!-- Area path -->
-                  <path d="M 10 180 Q 80 150 120 160 T 250 110 T 380 60 T 490 30 L 490 190 L 10 190 Z" fill="url(#chart-area-grad)" />
-                  
-                  <!-- Line path -->
-                  <path d="M 10 180 Q 80 150 120 160 T 250 110 T 380 60 T 490 30" fill="none" stroke="var(--deep-blue-light)" stroke-width="4" stroke-linecap="round" />
-                  
-                  <!-- Data Point Circles -->
-                  <circle cx="250" cy="110" r="6" fill="var(--primary-red)" stroke="var(--surface-white)" stroke-width="2" />
-                  <circle cx="490" cy="30" r="6" fill="var(--primary-red)" stroke="var(--surface-white)" stroke-width="2" />
-                </svg>
-                
-                <!-- Labels -->
-                <div class="chart-labels">
-                  <span>Jan</span>
-                  <span>Mar</span>
-                  <span>Mai</span>
-                  <span>Jul</span>
-                  <span>Set</span>
-                  <span>Nov</span>
-                </div>
-              </div>
             </div>
-
-            <!-- Side Columns for NPS and Cancellations -->
-            <div class="side-panel-column">
-              <!-- NPS Card -->
-              <div class="card nps-gauge-card">
-                <h3 class="nps-title">Saúde da Unidade (NPS)</h3>
-                <div class="gauge-wrapper">
-                  <svg class="gauge-svg" viewBox="0 0 160 160">
-                    <circle class="gauge-bg" cx="80" cy="80" r="70" />
-                    <circle class="gauge-fill" cx="80" cy="80" r="70" id="desktopNpsGauge" />
-                  </svg>
-                  <div class="gauge-center-text">
-                    <span class="nps-score">82</span>
-                    <span class="nps-label">Excelente</span>
-                  </div>
-                </div>
-                <div class="gauge-legend">
-                  <div class="legend-item">
-                    <span class="legend-color promoters"></span>
-                    <span>Promotores</span>
-                  </div>
-                  <div class="legend-item">
-                    <span class="legend-color neutrals"></span>
-                    <span>Neutros</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Cancelamentos -->
-              <div class="card cancellations-card">
-                <h3 class="cancellations-title">Cancelamentos (Mês)</h3>
-                <div class="bar-chart-container">
-                  <!-- Bar 1 -->
-                  <div class="bar-group">
-                    <div class="bar-pill" style="height: 40%;">
-                      <span class="bar-tooltip">Semana 1: 12</span>
-                    </div>
-                    <span class="bar-label">Sem 1</span>
-                  </div>
-                  <!-- Bar 2 -->
-                  <div class="bar-group">
-                    <div class="bar-pill" style="height: 60%;">
-                      <span class="bar-tooltip">Semana 2: 18</span>
-                    </div>
-                    <span class="bar-label">Sem 2</span>
-                  </div>
-                  <!-- Bar 3 -->
-                  <div class="bar-group">
-                    <div class="bar-pill" style="height: 30%;">
-                      <span class="bar-tooltip">Semana 3: 9</span>
-                    </div>
-                    <span class="bar-label">Sem 3</span>
-                  </div>
-                  <!-- Bar 4 -->
-                  <div class="bar-group">
-                    <div class="bar-pill active" style="height: 80%;">
-                      <span class="bar-tooltip">Semana 4: 24</span>
-                    </div>
-                    <span class="bar-label">Sem 4</span>
-                  </div>
-                  <!-- Bar 5 -->
-                  <div class="bar-group">
-                    <div class="bar-pill" style="height: 50%;">
-                      <span class="bar-tooltip">Semana 5: 15</span>
-                    </div>
-                    <span class="bar-label">Sem 5</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- End Desktop Grid -->
-
-          <!-- MOBILE WORKSPACE LAYOUT (Visible on Mobile) -->
-          <div class="mobile-featured-section">
-            
-            <!-- Mobile Featured Card: Alunos Matriculados -->
-            <div class="card">
-              <div class="kpi-header">
-                <div>
-                  <h4 class="nps-label" style="font-size: 0.75rem;">Alunos Matriculados</h4>
-                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
-                    <span class="kpi-value" style="font-size: 2.5rem; color: var(--deep-blue-light);">1.452</span>
-                    <div class="kpi-trend trend-up" style="background-color: var(--success-green-light); padding: 2px 6px; border-radius: var(--radius-sm);">
-                      <span class="material-icons" style="font-size: 12px; font-weight: bold;">arrow_upward</span>
-                      <span style="font-size: 10px;">8.4%</span>
-                    </div>
-                  </div>
-                </div>
-                <div style="background-color: var(--surface-gray); padding: 8px; border-radius: var(--radius-md); color: var(--deep-blue-light);">
-                  <span class="material-icons">school</span>
-                </div>
-              </div>
-              
-              <!-- YoY Growth Bar Chart -->
-              <div class="bar-chart-container" style="height: 100px; margin-top: 1.5rem;">
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 40%; background-color: var(--border-color);"></div>
-                  <span class="bar-label" style="font-size: 10px;">2021</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 55%; background-color: var(--border-color);"></div>
-                  <span class="bar-label" style="font-size: 10px;">2022</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 70%; background-color: var(--border-color);"></div>
-                  <span class="bar-label" style="font-size: 10px;">2023</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill active" style="height: 90%; background-color: var(--deep-blue-light);"></div>
-                  <span class="bar-label" style="font-size: 10px; color: var(--deep-blue-light); font-weight: bold;">2024</span>
-                </div>
-              </div>
-              <p style="text-align: center; font-size: 0.65rem; color: var(--text-muted); margin-top: 8px;">Crescimento YOY (Ano a Ano)</p>
-            </div>
-
-            <h3 style="font-family: var(--font-headline); font-size: 1.25rem; font-weight: 700; color: var(--deep-blue); margin-top: 0.5rem;">Saúde da Unidade</h3>
-
-            <!-- Mobile NPS Card -->
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <h4 class="nps-label" style="font-size: 0.75rem;">NPS Atual</h4>
-                <span class="kpi-value" style="font-size: 2.25rem; color: var(--deep-blue-light); display: block; margin-top: 4px;">78</span>
-                <span style="font-size: 11px; color: var(--success-green); font-weight: 600;">Zona de Qualidade</span>
-              </div>
-              <div class="gauge-wrapper" style="width: 80px; height: 80px; margin: 0;">
-                <svg class="gauge-svg" viewBox="0 0 160 160">
-                  <circle class="gauge-bg" cx="80" cy="80" r="70" />
-                  <circle class="gauge-fill" cx="80" cy="80" r="70" id="mobileNpsGauge" style="stroke: var(--success-green);" />
-                </svg>
-                <div class="gauge-center-text">
-                  <span class="material-icons" style="color: var(--success-green); font-size: 28px;">sentiment_very_satisfied</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mobile Cancelamentos Card -->
-            <div class="card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">Cancelamentos do Mês</h4>
-                <span class="material-icons" style="color: var(--text-muted); font-size: 18px;">trending_down</span>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div style="display: flex; align-items: baseline; gap: 4px;">
-                  <span class="kpi-value" style="font-size: 2.25rem; color: var(--primary-red);">12</span>
-                  <span style="font-size: 12px; color: var(--text-muted);">/ 1.452</span>
-                </div>
-                <div class="kpi-trend trend-down" style="background-color: var(--error-red-light); padding: 2px 6px; border-radius: var(--radius-sm);">
-                  <span class="material-icons" style="font-size: 12px;">warning</span>
-                  <span style="font-size: 10px;">+2 vs Mês Ant.</span>
-                </div>
-              </div>
-              
-              <div class="churn-progress-wrapper" style="margin-top: 1rem;">
-                <div class="churn-progress-bar">
-                  <div class="churn-segment red" style="width: 15%;"></div>
-                  <div class="churn-segment yellow" style="width: 25%;"></div>
-                  <div class="churn-segment green" style="width: 60%;"></div>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- End Mobile Layout -->
-          
-        </div> <!-- End View Home -->
-
-
-        <!-- ============================================== -->
-        <!-- VIEW 2: RETENÇÃO / INSIGHTS                    -->
-        <!-- ============================================== -->
-        <div id="view-retention" class="view-section">
-          
-          <!-- Desktop Page Header -->
-          <div class="page-header">
-            <div class="page-title">
-              <h2>Retenção & Termômetro</h2>
-              <p>Análise aprofundada de cancelamentos, motivos e indicadores pedagógicos.</p>
-            </div>
-            <div class="header-actions">
-              <select class="select-premium">
-                <option>Q3 2023</option>
-                <option>Q2 2023</option>
-                <option>Q1 2023</option>
-                <option>2022 Completo</option>
-              </select>
-              <button class="btn btn-primary">
-                <span class="material-icons" style="font-size: 18px;">download</span>
-                Exportar
-              </button>
-            </div>
-          </div>
-
-          <!-- DESKTOP WORKSPACE LAYOUT (Visible on Desktop) -->
-          <div class="desktop-only-grid dashboard-grid">
-            
-            <!-- KPI 1: Taxa de Retenção -->
-            <div class="card kpi-card tertiary-accent">
-              <div class="kpi-header">
-                <h3>Taxa de Retenção</h3>
-                <span class="material-icons kpi-icon">analytics</span>
-              </div>
-              <div class="kpi-value">92.4%</div>
-              <div class="kpi-trend trend-up">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>+1.2% vs. período anterior</span>
-              </div>
-            </div>
-
-            <!-- KPI 2: Cancelamentos (Mês) -->
-            <div class="card kpi-card primary-accent">
-              <div class="kpi-header">
-                <h3>Cancelamentos (Mês)</h3>
-                <span class="material-icons kpi-icon">trending_down</span>
-              </div>
-              <div class="kpi-value">47</div>
-              <div class="kpi-trend trend-down">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>+5 vs. mês anterior</span>
-              </div>
-            </div>
-
-            <!-- KPI 3: Risco Alto Detectado -->
-            <div class="card kpi-card yellow-accent">
-              <div class="kpi-header">
-                <h3>Risco Alto Detectado</h3>
-                <span class="material-icons kpi-icon">warning</span>
-              </div>
-              <div class="kpi-value">18</div>
-              <div class="kpi-trend trend-neutral">
-                <span>Alunos mapeados</span>
-              </div>
-            </div>
-
-            <!-- Double Line Chart Area (Voluntário vs Involuntário) -->
-            <div class="card chart-card">
-              <div class="chart-card-header">
-                <h3>Evolução de Cancelamentos</h3>
-                <div style="display: flex; gap: 1rem;">
-                  <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;">
-                    <span style="width: 8px; height: 8px; background-color: var(--primary-red); display: inline-block; border-radius: 50%;"></span>
-                    Voluntário
-                  </span>
-                  <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;">
-                    <span style="width: 8px; height: 8px; background-color: var(--deep-blue-light); display: inline-block; border-radius: 50%;"></span>
-                    Involuntário
-                  </span>
-                </div>
-              </div>
-              
-              <div class="chart-container">
-                <svg viewBox="0 0 500 220" preserveAspectRatio="none">
-                  <!-- Grid Lines -->
-                  <line x1="0" y1="40" x2="500" y2="40" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="90" x2="500" y2="90" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="140" x2="500" y2="140" stroke="var(--border-color)" stroke-dasharray="4 4" stroke-width="1" />
-                  <line x1="0" y1="190" x2="500" y2="190" stroke="var(--border-color)" stroke-width="1" />
-                  
-                  <!-- Voluntário Line (Red) -->
-                  <path d="M 10 170 L 80 160 L 150 130 L 220 140 L 290 90 L 360 100 L 430 70 L 490 80" fill="none" stroke="var(--primary-red)" stroke-width="3" stroke-linecap="round" />
-                  
-                  <!-- Involuntário Line (Blue dashed) -->
-                  <path d="M 10 195 L 80 200 L 150 185 L 220 190 L 290 175 L 360 180 L 430 165 L 490 150" fill="none" stroke="var(--deep-blue-light)" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round" />
-                  
-                  <!-- Highlight Circles -->
-                  <circle cx="290" cy="90" r="5" fill="var(--primary-red)" stroke="var(--surface-white)" stroke-width="1.5" />
-                  <circle cx="430" cy="70" r="5" fill="var(--primary-red)" stroke="var(--surface-white)" stroke-width="1.5" />
-                </svg>
-                
-                <div class="chart-labels">
-                  <span>Jan</span>
-                  <span>Mar</span>
-                  <span>Mai</span>
-                  <span>Jul</span>
-                  <span>Set</span>
-                  <span>Nov</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pareto Termômetro Column -->
-            <div class="card side-panel-column" style="grid-column: span 4;">
-              <h3 class="cancellations-title" style="margin-bottom: 1.25rem;">Motivos (Termômetro)</h3>
-              
-              <div class="pareto-list">
-                <!-- Reason 1 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Financeiro</span>
-                    <span>45%</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill red" id="pbar1"></div>
-                  </div>
-                </div>
-                <!-- Reason 2 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Mudança / Relocação</span>
-                    <span>25%</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill blue" id="pbar2"></div>
-                  </div>
-                </div>
-                <!-- Reason 3 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Insat. Pedagógica</span>
-                    <span>15%</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill yellow" id="pbar3"></div>
-                  </div>
-                </div>
-                <!-- Reason 4 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Horário / Conflito</span>
-                    <span>10%</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill secondary" id="pbar4"></div>
-                  </div>
-                </div>
-                <!-- Reason 5 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Outros</span>
-                    <span>5%</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill gray" id="pbar5"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
-                  <strong style="color: var(--text-main);">Alerta:</strong> O fator financeiro representa a principal causa de atrito neste trimestre. Sugerida campanha direcionada de fidelização.
-                </p>
-              </div>
-            </div>
-
-            <!-- Bottom Correlation Table -->
-            <div class="card table-card">
-              <h3 class="cancellations-title" style="margin-bottom: 1.25rem;">Indicador Pedagógico vs. Risco de Evasão</h3>
-              
-              <div class="table-responsive">
-                <table class="table-premium">
-                  <thead>
-                    <tr>
-                      <th>Turma / Nível</th>
-                      <th>Média Notas (Q3)</th>
-                      <th>Freq. Média</th>
-                      <th>Índice de Risco (Algoritmo)</th>
-                      <th style="text-align: right;">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong style="color: var(--text-main); display: block;">Teens 3 - Sáb 09h</strong>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Prof. Mariana S.</span>
-                      </td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 4px; color: var(--primary-red); font-weight: 700;">
-                          <span>6.8</span>
-                          <span class="material-icons" style="font-size: 16px;">arrow_downward</span>
-                        </div>
-                      </td>
-                      <td>78%</td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <div class="risk-bar-bg">
-                            <div class="risk-bar-fill high" id="rbar1"></div>
-                          </div>
-                          <span class="risk-badge high">Alto</span>
-                        </div>
-                      </td>
-                      <td style="text-align: right;">
-                        <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Intervir</button>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <strong style="color: var(--text-main); display: block;">Kids 2 - Seg/Qua 15h</strong>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Prof. Carlos A.</span>
-                      </td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 4px; color: var(--text-main); font-weight: 700;">
-                          <span>7.5</span>
-                          <span class="material-icons" style="font-size: 16px; color: var(--text-muted);">horizontal_rule</span>
-                        </div>
-                      </td>
-                      <td>85%</td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <div class="risk-bar-bg">
-                            <div class="risk-bar-fill medium" id="rbar2"></div>
-                          </div>
-                          <span class="risk-badge medium">Médio</span>
-                        </div>
-                      </td>
-                      <td style="text-align: right;">
-                        <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Analisar</button>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <strong style="color: var(--text-main); display: block;">Adults Advanced - Ter/Qui 19h</strong>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Prof. Elena M.</span>
-                      </td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 4px; color: var(--success-green); font-weight: 700;">
-                          <span>9.2</span>
-                          <span class="material-icons" style="font-size: 16px;">arrow_upward</span>
-                        </div>
-                      </td>
-                      <td>95%</td>
-                      <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <div class="risk-bar-bg">
-                            <div class="risk-bar-fill low" id="rbar3"></div>
-                          </div>
-                          <span class="risk-badge low">Baixo</span>
-                        </div>
-                      </td>
-                      <td style="text-align: right;">
-                        <span class="material-icons" style="color: var(--success-green); font-size: 20px;">check_circle</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            
-          </div> <!-- End Desktop Grid -->
-
-          <!-- MOBILE WORKSPACE LAYOUT (Visible on Mobile) -->
-          <div class="mobile-featured-section">
-            
-            <!-- Mobile Retention Context Header -->
-            <div style="margin-bottom: 0.5rem;">
-              <h2 style="font-family: var(--font-headline); font-size: 1.5rem; font-weight: 700; color: var(--deep-blue-light);">Retention & Pedagogy</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Analyzing student continuity and academic performance correlations.</p>
-            </div>
-
-            <!-- Card 1: Evolução de Cancelamentos -->
-            <div class="card">
-              <div class="kpi-header">
-                <div>
-                  <h4 class="nps-label" style="font-size: 0.75rem;">Evolução de Cancelamentos</h4>
-                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
-                    <span class="kpi-value" style="font-size: 2.5rem; color: var(--primary-red);">142</span>
-                    <div class="kpi-trend trend-down" style="background-color: var(--error-red-light); padding: 2px 6px; border-radius: var(--radius-sm);">
-                      <span class="material-icons" style="font-size: 12px;">trending_up</span>
-                      <span style="font-size: 10px;">12% vs last year</span>
-                    </div>
-                  </div>
-                </div>
-                <div style="background-color: var(--surface-gray); padding: 8px; border-radius: var(--radius-md); color: var(--primary-red);">
-                  <span class="material-icons">monitoring</span>
-                </div>
-              </div>
-              
-              <!-- Jan-Apr Monthly Bars -->
-              <div class="bar-chart-container" style="height: 100px; margin-top: 1.5rem;">
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 40%;"></div>
-                  <span class="bar-label" style="font-size: 10px;">Jan</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 60%;"></div>
-                  <span class="bar-label" style="font-size: 10px;">Fev</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 30%;"></div>
-                  <span class="bar-label" style="font-size: 10px;">Mar</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill active" style="height: 85%;"></div>
-                  <span class="bar-label" style="font-size: 10px; color: var(--primary-red); font-weight: bold;">Abr</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 2: Termômetro de Motivos -->
-            <div class="card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">Termômetro de Motivos</h4>
-                <span class="material-icons" style="color: var(--brand-yellow); font-size: 20px;">thermostat</span>
-              </div>
-              
-              <div class="pareto-list">
-                <!-- Reason 1 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">Financial</span>
-                    <span style="font-size: 0.8rem; color: var(--primary-red);">45%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill red" id="mbar1"></div>
-                  </div>
-                </div>
-                <!-- Reason 2 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">Relocation</span>
-                    <span style="font-size: 0.8rem; color: var(--brand-yellow);">30%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill yellow" id="mbar2"></div>
-                  </div>
-                </div>
-                <!-- Reason 3 -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">Pedagogical Alignment</span>
-                    <span style="font-size: 0.8rem; color: var(--deep-blue-light);">15%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill blue" id="mbar3"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3: Indicador Pedagógico -->
-            <div class="card" style="background-color: var(--deep-blue); color: var(--text-white);">
-              <div class="kpi-header" style="margin-bottom: 0.75rem;">
-                <div>
-                  <h4 style="font-size: 0.7rem; color: rgba(255,255,255,0.7); text-transform: uppercase; font-weight: bold; letter-spacing: 0.05em;">Indicador Pedagógico (Avg Grade)</h4>
-                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
-                    <span class="kpi-value" style="font-size: 2.5rem; color: var(--text-white);">8.7</span>
-                    <div class="kpi-trend trend-up" style="background-color: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: var(--radius-sm); color: var(--text-white);">
-                      <span class="material-icons" style="font-size: 12px; font-weight: bold;">arrow_upward</span>
-                      <span style="font-size: 10px;">+0.4</span>
-                    </div>
-                  </div>
-                </div>
-                <div style="background-color: rgba(255,255,255,0.1); padding: 8px; border-radius: var(--radius-md);">
-                  <span class="material-icons" style="color: var(--text-white);">school</span>
-                </div>
-              </div>
-              <p style="font-size: 0.75rem; color: rgba(255,255,255,0.8); line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 0.75rem; margin-top: 0.5rem;">
-                Turmas com médias acima de 8.0 apresentam probabilidade de 92% de retenção no próximo semestre.
-              </p>
-            </div>
-
-          </div> <!-- End Mobile Layout -->
-
-        </div> <!-- End View Retention -->
-
-
-        <!-- ============================================== -->
-        <!-- VIEW 3: EVENTOS & ROI                          -->
-        <!-- ============================================== -->
-        <div id="view-events" class="view-section">
-          
-          <!-- Desktop Page Header -->
-          <div class="page-header">
-            <div class="page-title" style="display: flex; flex-direction: column;">
-              <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 0.25rem;">
-                <a href="#" class="nav-link" data-target="view-home" style="text-decoration: none; display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-                  <span class="material-icons" style="font-size: 14px;">arrow_back</span> Voltar
-                </a>
-                <span style="font-size: 0.8rem; color: var(--border-color);">|</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Análise Detalhada</span>
-              </div>
-              <h2>Farmer's Market Q3</h2>
-              <p>Visão geral de engajamento, satisfação e impacto financeiro.</p>
-            </div>
-            
-            <div class="header-actions">
-              <button class="btn btn-secondary">
-                <span class="material-icons" style="font-size: 18px;">download</span>
-                Exportar PDF
-              </button>
-              <button class="btn btn-primary">
-                <span class="material-icons" style="font-size: 18px;">campaign</span>
-                Planejar Próxima Edição
-              </button>
-            </div>
-          </div>
-
-          <!-- DESKTOP WORKSPACE LAYOUT (Visible on Desktop) -->
-          <div class="desktop-only-grid dashboard-grid">
-            
-            <!-- KPI 1: Impacto Financeiro -->
-            <div class="card kpi-card tertiary-accent">
-              <div class="kpi-header">
-                <h3>Impacto Financeiro</h3>
-                <span class="material-icons kpi-icon">account_balance_wallet</span>
-              </div>
-              <div class="kpi-value">R$ 42.500</div>
-              <div class="kpi-trend trend-up">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>+15% vs. edição anterior</span>
-              </div>
-            </div>
-
-            <!-- KPI 2: Engajamento Total -->
-            <div class="card kpi-card primary-accent">
-              <div class="kpi-header">
-                <h3>Engajamento Total</h3>
-                <span class="material-icons kpi-icon">groups</span>
-              </div>
-              <div class="kpi-value">78%</div>
-              <div class="kpi-trend trend-up">
-                <span class="material-icons" style="font-size: 16px;">trending_up</span>
-                <span>Part. da base de alunos</span>
-              </div>
-            </div>
-
-            <!-- KPI 3: Satisfação (NPS) -->
-            <div class="card kpi-card yellow-accent">
-              <div class="kpi-header">
-                <h3>Satisfação (NPS)</h3>
-                <span class="material-icons kpi-icon">sentiment_very_satisfied</span>
-              </div>
-              <div class="kpi-value">4.8<span style="font-size: 1rem; color: var(--text-muted);">/5</span></div>
-              <div class="star-rating" style="margin-top: 0.25rem;">
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star_half</span>
-              </div>
-            </div>
-
-            <!-- Funil de Engajamento Chart Card -->
-            <div class="card chart-card" style="grid-column: span 8;">
-              <div class="chart-card-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1.25rem;">
-                <h3>Funil de Engajamento</h3>
-                <button class="chart-menu-btn">
-                  <span class="material-icons">more_horiz</span>
-                </button>
-              </div>
-              
-              <div style="display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex: 1; min-height: 250px;">
-                <!-- Funnel SVG/HTML Representation -->
-                <div class="funnel-container" style="max-width: 320px;">
-                  <div class="funnel-stage invited">
-                    <span>Convidados (1.200)</span>
-                  </div>
-                  <span class="material-icons funnel-arrow">arrow_downward</span>
-                  <div class="funnel-stage confirmed">
-                    <span>Confirmados (1.050)</span>
-                  </div>
-                  <span class="material-icons funnel-arrow">arrow_downward</span>
-                  <div class="funnel-stage attended">
-                    <span>Participantes (936)</span>
-                  </div>
-                </div>
-                
-                <!-- Funnel Key Insights Box -->
-                <div style="background-color: var(--surface-gray); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; max-width: 250px; width: 100%;">
-                  <h4 style="font-family: var(--font-headline); font-size: 0.85rem; font-weight: 700; color: var(--deep-blue); display: flex; align-items: center; gap: 6px; margin-bottom: 0.75rem;">
-                    <span class="material-icons" style="font-size: 16px; color: var(--deep-blue-light);">insights</span>
-                    Principais Conclusões
-                  </h4>
-                  <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
-                    <li style="display: flex; gap: 6px;">
-                      <span style="color: var(--primary-red); font-weight: bold;">•</span>
-                      Alta taxa de conversão (89%) de confirmados para presentes.
-                    </li>
-                    <li style="display: flex; gap: 6px;">
-                      <span style="color: var(--primary-red); font-weight: bold;">•</span>
-                      Participação cresceu 12% no segmento Teens em relação ao ano anterior.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- ROI & Retenção Panel -->
-            <div class="card side-panel-column" style="grid-column: span 4;">
-              <h3 class="cancellations-title" style="margin-bottom: 0.5rem;">ROI & Retenção</h3>
-              <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Impacto na rematrícula</p>
-              
-              <div class="pareto-list" style="gap: 1.5rem;">
-                <!-- Participant -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Participaram do Evento</span>
-                    <span style="color: var(--success-green);">94% Renovarão</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill" id="roibar1" style="background-color: var(--success-green);"></div>
-                  </div>
-                </div>
-                <!-- Non-Participant -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span>Não Participaram</span>
-                    <span>72% Renovarão</span>
-                  </div>
-                  <div class="pareto-bar-track">
-                    <div class="pareto-bar-fill" id="roibar2" style="background-color: var(--text-muted);"></div>
-                  </div>
-                </div>
-              </div>
-              
-              <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; background-color: var(--brand-yellow-light); border-radius: var(--radius-md); padding: 0.75rem; border: 1px dashed var(--brand-yellow);">
-                <p style="font-size: 0.75rem; color: #7f6000; line-height: 1.4; display: flex; gap: 6px; align-items: flex-start;">
-                  <span class="material-icons" style="font-size: 16px; margin-top: 2px;">info</span>
-                  <span>Alunos que participam do Farmer's Market têm uma taxa de retenção <strong>22% maior</strong>, justificando plenamente o investimento de R$ 12.000 no evento.</span>
-                </p>
-              </div>
-            </div>
-
-          </div> <!-- End Desktop Grid -->
-
-          <!-- MOBILE WORKSPACE LAYOUT (Visible on Mobile) -->
-          <div class="mobile-featured-section">
-            
-            <!-- Mobile Header context -->
-            <div style="margin-bottom: 0.5rem;">
-              <h2 style="font-family: var(--font-headline); font-size: 1.5rem; font-weight: 700; color: var(--deep-blue-light);">Farmer's Market Analysis</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Post-event performance and financial impact review.</p>
-              <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <span style="font-size: 9px; font-weight: 700; color: var(--primary-red); background-color: var(--error-red-light); padding: 2px 8px; border-radius: 99px;">Concluído: 12 Out</span>
-                <span style="font-size: 9px; font-weight: 700; color: var(--deep-blue-light); background-color: rgba(53, 49, 165, 0.1); padding: 2px 8px; border-radius: 99px;">Região: SP</span>
-              </div>
-            </div>
-
-            <!-- Card 1: Funil de Engajamento -->
-            <div class="card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">Engagement Funnel</h4>
-                <span class="material-icons" style="color: var(--deep-blue-light); font-size: 20px;">filter_alt</span>
-              </div>
-              
-              <div class="pareto-list">
-                <!-- Invited -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">Invited Base</span>
-                    <span style="font-size: 0.8rem; font-weight: 700;">1,200</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill gray" style="width: 100%;"></div>
-                  </div>
-                </div>
-                <!-- RSVP -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">RSVP Yes</span>
-                    <span style="font-size: 0.8rem; font-weight: 700;">850</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill yellow" id="mevent1"></div>
-                  </div>
-                </div>
-                <!-- Attended -->
-                <div>
-                  <div class="pareto-bar-label-group">
-                    <span style="font-size: 0.8rem; font-weight: 500;">Attended</span>
-                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--deep-blue-light);">720 (60%)</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill blue" id="mevent2"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 2: Satisfação Média (Blue Highlight Card) -->
-            <div class="card satisfaction-blue-card">
-              <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8;">Average Satisfaction</h4>
-              <div class="satisfaction-value" style="margin-top: 0.5rem;">
-                9.2<span>/10</span>
-              </div>
-              
-              <div class="star-rating">
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons">star</span>
-                <span class="material-icons" style="font-variation-settings: 'FILL' 0;">star_half</span>
-              </div>
-              <p style="font-size: 0.7rem; opacity: 0.7; margin-top: 0.75rem;">Baseado em 450 pesquisas pós-evento</p>
-            </div>
-
-            <!-- Card 3: Correlação de Retenção -->
-            <div class="card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">Retention Correlation</h4>
-                <span class="material-icons" style="color: var(--primary-red); font-size: 20px;">trending_up</span>
-              </div>
-              
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: center; margin-bottom: 0.75rem;">
-                <div style="background-color: var(--surface-gray); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.75rem;">
-                  <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Participants</span>
-                  <strong style="font-size: 1.75rem; color: var(--deep-blue-light); display: block;">88%</strong>
-                  <span style="font-size: 9px; color: var(--success-green); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 2px;">
-                    <span class="material-icons" style="font-size: 10px;">arrow_upward</span> +5% vs avg
-                  </span>
-                </div>
-                
-                <div style="background-color: var(--surface-gray); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; opacity: 0.7;">
-                  <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Non-Participants</span>
-                  <strong style="font-size: 1.75rem; color: var(--text-main); display: block;">76%</strong>
-                  <span style="font-size: 9px; color: var(--text-muted); display: block; margin-top: 4px;">Baseline renewal</span>
-                </div>
-              </div>
-              <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; font-style: italic; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
-                Alunos presentes demonstraram maior probabilidade de renovar para o próximo período.
-              </p>
-            </div>
-
-            <!-- Card 4: Impacto Financeiro Estimado -->
-            <div class="card" style="border-left: 4px solid var(--primary-red);">
-              <h4 class="nps-label" style="font-size: 0.75rem; margin-bottom: 0.5rem;">Impacto Financeiro Estimado</h4>
-              <div style="display: flex; align-items: baseline; gap: 6px;">
-                <span class="kpi-value" style="font-size: 2.25rem; color: var(--primary-red);">R$ 145k</span>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Receita Retida</span>
-              </div>
-              
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-                <div>
-                  <span style="font-size: 0.7rem; color: var(--text-muted); display: block;">Custo do Evento</span>
-                  <strong style="font-size: 1.15rem; color: var(--text-main);">R$ 12k</strong>
-                </div>
-                <div>
-                  <span style="font-size: 0.7rem; color: var(--text-muted); display: block;">ROI do Evento</span>
-                  <strong style="font-size: 1.15rem; color: var(--success-green);">1100%</strong>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- End Mobile Layout -->
-
-        </div> <!-- End View Events -->
-
-
-        <!-- ============================================== -->
-        <!-- VIEW 4: EXPERIÊNCIA & CLIENTE OCULTO           -->
-        <!-- ============================================== -->
-        <div id="view-nps" class="view-section">
-          
-          <!-- Desktop Page Header -->
-          <div class="page-header">
-            <div class="page-title" style="display: flex; flex-direction: column;">
-              <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 0.25rem;">
-                <a href="#" class="nav-link" data-target="view-home" style="text-decoration: none; display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-                  <span class="material-icons" style="font-size: 14px;">arrow_back</span> Voltar
-                </a>
-                <span style="font-size: 0.8rem; color: var(--border-color);">|</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Auditoria & NPS</span>
-              </div>
-              <h2>Experiência & Cliente Oculto</h2>
-              <p>Visão consolidada de satisfação e auditoria de qualidade.</p>
-            </div>
-            
-            <div class="header-actions">
-              <button class="btn btn-secondary">Mensal</button>
-              <button class="btn btn-primary">Trimestral</button>
-            </div>
-          </div>
-
-          <!-- DESKTOP WORKSPACE LAYOUT (Visible on Desktop) -->
-          <div class="desktop-only-grid dashboard-grid">
-            
-            <!-- NPS Score Card -->
-            <div class="card kpi-card tertiary-accent" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
-              <div>
-                <div class="kpi-header">
-                  <h3>NPS Score</h3>
-                  <span class="material-icons kpi-icon">sentiment_satisfied</span>
-                </div>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.5rem;">Média Q3 2023</p>
-              </div>
-              <div style="display: flex; align-items: baseline; gap: 8px;">
-                <span class="kpi-value" style="font-size: 3.5rem;">78</span>
-                <div class="kpi-trend trend-up" style="background-color: var(--success-green-light); padding: 2px 6px; border-radius: var(--radius-sm);">
-                  <span class="material-icons" style="font-size: 12px; font-weight: bold;">arrow_upward</span>
-                  <span style="font-size: 10px;">+4 pts</span>
-                </div>
-              </div>
-              <div class="churn-progress-wrapper" style="margin-top: 1.5rem;">
-                <div class="churn-progress-bar" style="height: 8px;">
-                  <div class="churn-segment green" style="width: 80%; background-color: var(--success-green);"></div>
-                  <div class="churn-segment yellow" style="width: 15%; background-color: var(--brand-yellow);"></div>
-                  <div class="churn-segment red" style="width: 5%; background-color: var(--primary-red);"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 6px; font-weight: 600;">
-                  <span>Promotores (80%)</span>
-                  <span>Neutral (15%)</span>
-                  <span>Detratores (5%)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Historical Evolution Chart Area (Stacked columns) -->
-            <div class="card chart-card" style="grid-column: span 8; min-height: 250px;">
-              <div class="chart-card-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-                <h3>Evolução Histórica</h3>
-              </div>
-              
-              <!-- Stacked Column Chart Container -->
-              <div class="stacked-chart-container" style="display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding: 10px 10px 0 10px; position: relative;">
-                <!-- Grid Lines background -->
-                <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; padding-bottom: 20px;">
-                  <div style="border-top: 1px dashed var(--border-color); width: 100%;"></div>
-                  <div style="border-top: 1px dashed var(--border-color); width: 100%;"></div>
-                  <div style="border-top: 1px dashed var(--border-color); width: 100%;"></div>
-                  <div style="border-top: 1px dashed var(--border-color); width: 100%;"></div>
-                </div>
-
-                <!-- Jan Bar -->
-                <div class="stacked-bar-group">
-                  <div class="stacked-bar-track" id="npsbar1">
-                    <div class="stacked-segment green" style="height: 70%;"></div>
-                    <div class="stacked-segment yellow" style="height: 20%;"></div>
-                    <div class="stacked-segment red" style="height: 10%;"></div>
-                  </div>
-                  <span class="bar-label">Jan</span>
-                </div>
-
-                <!-- Fev Bar -->
-                <div class="stacked-bar-group">
-                  <div class="stacked-bar-track" id="npsbar2">
-                    <div class="stacked-segment green" style="height: 72%;"></div>
-                    <div class="stacked-segment yellow" style="height: 18%;"></div>
-                    <div class="stacked-segment red" style="height: 10%;"></div>
-                  </div>
-                  <span class="bar-label">Fev</span>
-                </div>
-
-                <!-- Mar Bar -->
-                <div class="stacked-bar-group">
-                  <div class="stacked-bar-track" id="npsbar3">
-                    <div class="stacked-segment green" style="height: 68%;"></div>
-                    <div class="stacked-segment yellow" style="height: 22%;"></div>
-                    <div class="stacked-segment red" style="height: 10%;"></div>
-                  </div>
-                  <span class="bar-label">Mar</span>
-                </div>
-
-                <!-- Abr Bar -->
-                <div class="stacked-bar-group">
-                  <div class="stacked-bar-track" id="npsbar4">
-                    <div class="stacked-segment green" style="height: 78%;"></div>
-                    <div class="stacked-segment yellow" style="style: 15%; height: 15%;"></div>
-                    <div class="stacked-segment red" style="height: 7%;"></div>
-                  </div>
-                  <span class="bar-label">Abr</span>
-                </div>
-
-                <!-- Mai Bar -->
-                <div class="stacked-bar-group">
-                  <div class="stacked-bar-track" id="npsbar5">
-                    <div class="stacked-segment green" style="height: 80%;"></div>
-                    <div class="stacked-segment yellow" style="height: 15%;"></div>
-                    <div class="stacked-segment red" style="height: 5%;"></div>
-                  </div>
-                  <span class="bar-label">Mai</span>
-                </div>
-
-                <!-- Jun Bar (Active) -->
-                <div class="stacked-bar-group active">
-                  <div class="stacked-bar-track" id="npsbar6">
-                    <div class="stacked-segment green" style="height: 82%;"></div>
-                    <div class="stacked-segment yellow" style="height: 13%;"></div>
-                    <div class="stacked-segment red" style="height: 5%;"></div>
-                    <span class="bar-tooltip">Score: 78</span>
-                  </div>
-                  <span class="bar-label" style="font-weight: 800; color: var(--deep-blue-light);">Jun</span>
-                </div>
-              </div>
-
-              <!-- Legend -->
-              <div class="gauge-legend" style="margin-top: 1.5rem; justify-content: center;">
-                <div class="legend-item">
-                  <span class="legend-color promoters" style="background-color: var(--success-green);"></span>
-                  <span>Promotores</span>
-                </div>
-                <div class="legend-item">
-                  <span class="legend-color neutrals" style="background-color: var(--brand-yellow);"></span>
-                  <span>Neutros</span>
-                </div>
-                <div class="legend-item">
-                  <span class="legend-color detractors" style="background-color: var(--primary-red);"></span>
-                  <span>Detratores</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Title for Section 2: Cliente Oculto -->
-            <div style="grid-column: span 12; margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="material-icons" style="color: var(--deep-blue-light);">visibility</span>
-                <h3 style="font-family: var(--font-headline); font-size: 1.25rem; font-weight: 700; color: var(--deep-blue);">Cliente Oculto</h3>
-              </div>
-              <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
-                <span class="material-icons" style="font-size: 16px;">add</span> Nova Auditoria
-              </button>
-            </div>
-
-            <!-- Desempenho Geral Card -->
-            <div class="card side-panel-column" style="grid-column: span 4; justify-content: space-between;">
-              <h3 class="cancellations-title" style="margin-bottom: 0.5rem;">Desempenho Geral</h3>
-              
-              <!-- Circular Gauge for Aderência -->
-              <div class="gauge-wrapper" style="width: 140px; height: 140px; margin: 0.5rem auto;">
-                <svg class="gauge-svg" viewBox="0 0 160 160">
-                  <circle class="gauge-bg" cx="80" cy="80" r="70" />
-                  <circle class="gauge-fill" cx="80" cy="80" r="70" id="adherenceGauge" style="stroke: var(--deep-blue-light);" />
-                </svg>
-                <div class="gauge-center-text">
-                  <span class="nps-score" style="font-size: 2rem; color: var(--deep-blue-light);">85%</span>
-                  <span class="nps-label" style="font-size: 0.55rem;">Aderência</span>
-                </div>
-              </div>
-
-              <!-- Supporting Category Progress Bars -->
-              <div class="pareto-list" style="gap: 0.75rem; margin-top: 0.5rem;">
-                <div>
-                  <div class="pareto-bar-label-group" style="font-size: 0.75rem;">
-                    <span>Atendimento Inicial</span>
-                    <span style="color: var(--success-green);">92%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill" id="catbar1" style="background-color: var(--success-green);"></div>
-                  </div>
-                </div>
-                <div>
-                  <div class="pareto-bar-label-group" style="font-size: 0.75rem;">
-                    <span>Limpeza & Organização</span>
-                    <span style="color: var(--deep-blue-light);">88%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill" id="catbar2" style="background-color: var(--deep-blue-light);"></div>
-                  </div>
-                </div>
-                <div>
-                  <div class="pareto-bar-label-group" style="font-size: 0.75rem;">
-                    <span>Apresentação Comercial</span>
-                    <span style="color: var(--brand-yellow);">75%</span>
-                  </div>
-                  <div class="pareto-bar-track" style="height: 6px;">
-                    <div class="pareto-bar-fill" id="catbar3" style="background-color: var(--brand-yellow);"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Relatório Completo Card -->
-            <div class="card chart-card" style="grid-column: span 8; justify-content: space-between;">
-              <div class="chart-card-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-                <h3>Relatório Completo - Última Visita</h3>
-                <span style="font-size: 0.75rem; color: var(--text-muted); background-color: var(--surface-gray); padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 600;">15 Jun 2023</span>
-              </div>
-
-              <!-- Media Gallery Subgrid -->
-              <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem; margin-bottom: 1rem;">
-                <!-- Video Box -->
-                <div class="gallery-video-card" style="position: relative; border-radius: var(--radius-md); overflow: hidden; background-color: #2c3137; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer;">
-                  <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=400" alt="Gravação da Recepção" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
-                  <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.25);"></div>
-                  <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-white);">
-                    <span class="material-icons" style="font-size: 3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">play_circle</span>
-                    <span style="font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Gravação da Recepção</span>
-                  </div>
-                  <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); color: var(--text-white); font-size: 10px; padding: 2px 6px; border-radius: var(--radius-sm); font-weight: bold; z-index: 10;">05:42</span>
-                </div>
-
-                <!-- Audio & Notes List -->
-                <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;">
-                  <!-- Audio Item -->
-                  <div class="media-list-item" style="display: flex; align-items: center; gap: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 14px; background: var(--surface-white); cursor: pointer; transition: all 0.2s;">
-                    <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-red-light); display: flex; align-items: center; justify-content: center; color: var(--primary-red);">
-                      <span class="material-icons" style="font-size: 18px;">mic</span>
-                    </div>
-                    <div style="flex: 1;">
-                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Áudio Interação Diretor</h4>
-                      <p style="font-size: 0.7rem; color: var(--text-muted);">12:30 min</p>
-                    </div>
-                    <span class="material-icons" style="color: var(--text-muted); font-size: 18px;">download</span>
-                  </div>
-
-                  <!-- PDF Item -->
-                  <div class="media-list-item" style="display: flex; align-items: center; gap: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 14px; background: var(--surface-white); cursor: pointer; transition: all 0.2s;">
-                    <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-red-light); display: flex; align-items: center; justify-content: center; color: var(--primary-red);">
-                      <span class="material-icons" style="font-size: 18px;">description</span>
-                    </div>
-                    <div style="flex: 1;">
-                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Transcrição & Notas</h4>
-                      <p style="font-size: 0.7rem; color: var(--text-muted);">PDF • 2.4 MB</p>
-                    </div>
-                    <span class="material-icons" style="color: var(--text-muted); font-size: 18px;">open_in_new</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Auditor Highlight Notes -->
-              <div class="highlight-notes-box" style="border-left: 4px solid var(--primary-red); background-color: var(--surface-gray); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 12px 16px;">
-                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                  <span class="material-icons" style="color: var(--primary-red); font-size: 16px;">edit_note</span>
-                  <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em;">Destaque do Auditor</span>
-                </div>
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; font-style: italic;">
-                  "A equipe de recepção foi extremamente cordial, mas notou-se hesitação na explicação dos novos pacotes corporativos. A área de espera estava impecável."
-                </p>
-              </div>
-            </div>
-
-          </div> <!-- End Desktop Grid -->
-
-          <!-- MOBILE WORKSPACE LAYOUT (Visible on Mobile) -->
-          <div class="mobile-featured-section">
-            
-            <!-- Mobile Header context -->
-            <div style="margin-bottom: 0.5rem;">
-              <h2 style="font-family: var(--font-headline); font-size: 1.5rem; font-weight: 700; color: var(--deep-blue-light);">Customer Experience</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Desempenho da unidade e percepção do cliente.</p>
-            </div>
-
-            <!-- Card 1: NPS da Unidade -->
-            <div class="card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">NPS da Unidade</h4>
-                <div class="kpi-trend trend-up" style="background-color: var(--success-green-light); padding: 2px 8px; border-radius: var(--radius-full); margin-top: 0;">
-                  <span class="material-icons" style="font-size: 12px; font-weight: bold;">arrow_drop_up</span>
-                  <span style="font-size: 10px;">4.2%</span>
-                </div>
-              </div>
-              
-              <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem;">
-                <span class="kpi-value" style="font-size: 3rem; color: var(--deep-blue-light);">68</span>
-                <span class="nps-label" style="font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.08em; margin-top: 2px;">Zona de Qualidade</span>
-              </div>
-              
-              <!-- Mini Columns Chart for Jan-Abr -->
-              <div class="bar-chart-container" style="height: 90px; margin-top: 1rem;">
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 0%; background-color: var(--border-color);" id="mnpsbar1"></div>
-                  <span class="bar-label" style="font-size: 10px;">Jan</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 0%; background-color: var(--border-color);" id="mnpsbar2"></div>
-                  <span class="bar-label" style="font-size: 10px;">Fev</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill" style="height: 0%; background-color: var(--border-color);" id="mnpsbar3"></div>
-                  <span class="bar-label" style="font-size: 10px;">Mar</span>
-                </div>
-                <div class="bar-group">
-                  <div class="bar-pill active" style="height: 0%; background-color: var(--deep-blue-light);" id="mnpsbar4"></div>
-                  <span class="bar-label" style="font-size: 10px; color: var(--deep-blue-light); font-weight: bold;">Abr</span>
-                </div>
-              </div>
-
-              <!-- Segment Breakdown -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1.5rem; text-align: center;">
-                <div>
-                  <span style="width: 8px; height: 8px; background-color: var(--deep-blue-light); display: inline-block; border-radius: 50%; margin-right: 4px;"></span>
-                  <span style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-top: 2px;">75%</span>
-                  <span style="font-size: 9px; color: var(--text-muted); text-transform: uppercase;">Promoters</span>
-                </div>
-                <div>
-                  <span style="width: 8px; height: 8px; background-color: var(--brand-yellow); display: inline-block; border-radius: 50%; margin-right: 4px;"></span>
-                  <span style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-top: 2px;">18%</span>
-                  <span style="font-size: 9px; color: var(--text-muted); text-transform: uppercase;">Passives</span>
-                </div>
-                <div>
-                  <span style="width: 8px; height: 8px; background-color: var(--primary-red); display: inline-block; border-radius: 50%; margin-right: 4px;"></span>
-                  <span style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-top: 2px;">7%</span>
-                  <span style="font-size: 9px; color: var(--text-muted); text-transform: uppercase;">Detractors</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 2: Cliente Oculto -->
-            <div class="card">
-              <h4 class="nps-label" style="font-size: 0.75rem; margin-bottom: 1.25rem;">Cliente Oculto</h4>
-              
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div>
-                  <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">Nota Geral (Última Visita)</span>
-                  <div style="display: flex; align-items: baseline; gap: 4px;">
-                    <span class="kpi-value" style="font-size: 2.5rem; color: var(--deep-blue-light);">9.4</span>
-                    <span style="font-size: 1rem; color: var(--text-muted);">/10</span>
-                  </div>
-                </div>
-                <div style="width: 54px; height: 54px; border: 3px solid var(--deep-blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--deep-blue-light); font-family: var(--font-headline); font-weight: 800; font-size: 1.25rem;">
-                  A+
-                </div>
-              </div>
-
-              <!-- Line Chart for Q1, Q2, Q3 -->
-              <div style="position: relative; height: 110px; width: 100%; margin-top: 1.5rem;">
-                <svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                  <!-- Background grid dash lines -->
-                  <line x1="0" y1="10" x2="100" y2="10" stroke="var(--border-color)" stroke-dasharray="3 3" stroke-width="0.5" />
-                  <line x1="0" y1="20" x2="100" y2="20" stroke="var(--border-color)" stroke-dasharray="3 3" stroke-width="0.5" />
-                  <line x1="0" y1="30" x2="100" y2="30" stroke="var(--border-color)" stroke-dasharray="3 3" stroke-width="0.5" />
-
-                  <!-- Trend Line Path -->
-                  <path d="M 5 30 Q 30 10 55 20 T 95 6" fill="none" stroke="var(--deep-blue-light)" stroke-width="2" class="animated-line-path" id="mnpsline" />
-                  
-                  <!-- Dots -->
-                  <circle cx="5" cy="30" r="2.5" fill="var(--deep-blue-light)" />
-                  <circle cx="50" cy="20" r="2.5" fill="var(--deep-blue-light)" />
-                  <circle cx="95" cy="6" r="2.5" fill="var(--primary-red)" stroke="var(--surface-white)" stroke-width="1" />
-                </svg>
-                
-                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 700; margin-top: 6px; padding: 0 4px;">
-                  <span>Q1</span>
-                  <span>Q2</span>
-                  <span>Q3</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3: Relatório Completo Gallery -->
-            <div class="card" style="padding: 1.25rem 0;">
-              <h4 class="nps-label" style="font-size: 0.75rem; margin-bottom: 1rem; padding: 0 1.25rem;">Relatório Completo</h4>
-              
-              <!-- Scroll container -->
-              <div class="horizontal-scroll-gallery" style="display: flex; gap: 1rem; overflow-x: auto; padding: 0 1.25rem 0.5rem 1.25rem; scrollbar-width: none;">
-                
-                <!-- Video Item Card -->
-                <div style="flex: 0 0 240px; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--surface-white); display: flex; flex-direction: column;">
-                  <div style="height: 120px; background-color: #2c3137; position: relative; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=300" alt="Video" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-                    <span class="material-icons" style="font-size: 2.5rem; color: var(--text-white); position: relative; z-index: 5;">play_circle</span>
-                    <span style="position: absolute; top: 8px; right: 8px; background-color: var(--deep-blue-light); color: var(--text-white); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-sm);">VÍDEO</span>
-                  </div>
-                  <div style="padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                      <h5 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Atendimento Recepção</h5>
-                      <span style="font-size: 0.7rem; color: var(--text-muted);">Visita: 15/04/2024</span>
-                    </div>
-                    <button class="btn btn-secondary" style="width: 100%; justify-content: center; font-size: 0.75rem; padding: 6px; margin-top: 12px;">ASSISTIR</button>
-                  </div>
-                </div>
-
-                <!-- Audio Item Card -->
-                <div style="flex: 0 0 240px; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--surface-white); display: flex; flex-direction: column;">
-                  <div style="height: 120px; background-color: var(--surface-gray); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px;">
-                    <span class="material-icons" style="font-size: 2rem; color: var(--deep-blue-light); margin-bottom: 6px;">mic</span>
-                    <div style="width: 80%; height: 6px; background-color: var(--border-color); border-radius: var(--radius-full); overflow: hidden; display: flex;">
-                      <div style="width: 40%; background-color: var(--deep-blue-light); height: 100%;"></div>
-                    </div>
-                    <span style="position: absolute; top: 8px; right: 8px; background-color: var(--brand-yellow); color: var(--text-white); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-sm);">ÁUDIO</span>
-                  </div>
-                  <div style="padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                      <h5 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Dúvidas Matrícula</h5>
-                      <span style="font-size: 0.7rem; color: var(--text-muted);">Visita: 10/04/2024</span>
-                    </div>
-                    <button class="btn btn-secondary" style="width: 100%; justify-content: center; font-size: 0.75rem; padding: 6px; margin-top: 12px;">OUVIR</button>
-                  </div>
-                </div>
-
-                <!-- Text Item Card -->
-                <div style="flex: 0 0 240px; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--surface-white); display: flex; flex-direction: column;">
-                  <div style="height: 120px; background-color: var(--surface-gray); position: relative; display: flex; flex-direction: column; justify-content: center; padding: 16px; gap: 6px;">
-                    <div style="height: 4px; width: 90%; background-color: var(--text-muted); opacity: 0.3; border-radius: var(--radius-full);"></div>
-                    <div style="height: 4px; width: 75%; background-color: var(--text-muted); opacity: 0.3; border-radius: var(--radius-full);"></div>
-                    <div style="height: 4px; width: 60%; background-color: var(--text-muted); opacity: 0.3; border-radius: var(--radius-full);"></div>
-                    <span class="material-icons" style="font-size: 1.5rem; color: var(--deep-blue-light); opacity: 0.2; position: absolute; bottom: 8px; left: 8px;">description</span>
-                    <span style="position: absolute; top: 8px; right: 8px; background-color: var(--text-muted); color: var(--text-white); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-sm);">TEXTO</span>
-                  </div>
-                  <div style="padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                      <h5 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Avaliação Estrutural</h5>
-                      <span style="font-size: 0.7rem; color: var(--text-muted);">Visita: 02/04/2024</span>
-                    </div>
-                    <button class="btn btn-secondary" style="width: 100%; justify-content: center; font-size: 0.75rem; padding: 6px; margin-top: 12px;">LER RESUMO</button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            
-          </div> <!-- End Mobile Layout -->
-
-          </div> <!-- End Mobile Layout -->
-
-        </div> <!-- End View NPS -->
-
-
-        <!-- ============================================== -->
-        <!-- VIEW 5: GESTÃO DE DADOS                        -->
-        <!-- ============================================== -->
-        <div id="view-data" class="view-section">
-          
-          <!-- Desktop Page Header -->
-          <div class="page-header">
-            <div class="page-title" style="display: flex; flex-direction: column;">
-              <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 0.25rem;">
-                <a href="#" class="nav-link" data-target="view-home" style="text-decoration: none; display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-                  <span class="material-icons" style="font-size: 14px;">arrow_back</span> Voltar
-                </a>
-                <span style="font-size: 0.8rem; color: var(--border-color);">|</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Console de Administração</span>
-              </div>
-              <h2>Gestão de Dados</h2>
-              <p>Importe e gerencie conjuntos de dados institucionais para atualizar as métricas dos dashboards.</p>
-            </div>
-          </div>
-
-          <!-- Sub-navigation Tabs (Desktop) -->
-          <div class="desktop-only-grid" style="grid-column: span 12; display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem;">
-            <button class="select-tab-btn" style="padding: 12px 24px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer;">Fontes de Dados</button>
-            <button class="select-tab-btn active" style="padding: 12px 24px; font-size: 0.85rem; font-weight: 700; color: var(--primary-red); border: none; background: none; border-bottom: 2px solid var(--primary-red); cursor: pointer;">Upload de Dados</button>
-            <button class="select-tab-btn" style="padding: 12px 24px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer;">Histórico de Importações</button>
-          </div>
-
-          <!-- DESKTOP WORKSPACE LAYOUT (Visible on Desktop) -->
-          <div class="desktop-only-grid dashboard-grid">
-            
-            <!-- Main Upload Area (spans 8 columns) -->
-            <div class="card chart-card" style="grid-column: span 8; min-height: 380px; justify-content: space-between;">
-              <div class="chart-card-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1.5rem;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-red-light); display: flex; align-items: center; justify-content: center; color: var(--primary-red);">
-                    <span class="material-icons">cloud_upload</span>
-                  </div>
-                  <div>
-                    <h3 style="font-family: var(--font-headline); font-size: 1.1rem; font-weight: 700; color: var(--deep-blue); margin: 0;">Importação em Lote</h3>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Arraste e solte arquivos para atualizar métricas instantaneamente.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Dropzone Area -->
-              <div id="desktopDropzone" class="dropzone-area" style="border: 2px dashed var(--border-color); border-radius: var(--radius-lg); padding: 3rem 1.5rem; text-align: center; background-color: var(--surface-gray); cursor: pointer; transition: all 0.3s; position: relative;">
-                <input type="file" id="desktopFileInput" accept=".csv, .xlsx" style="position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 10;">
-                <span class="material-icons" style="font-size: 3.5rem; color: var(--text-muted); margin-bottom: 1rem;">upload_file</span>
-                <h4 style="font-family: var(--font-headline); font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Selecione um arquivo ou arraste e solte aqui</h4>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">Formatos suportados: CSV ou XLSX (Tamanho máximo: 50MB)</p>
-                <button class="btn btn-secondary" style="position: relative; z-index: 5; pointer-events: none;">Procurar Arquivos</button>
-              </div>
-
-              <!-- Selected File Preview Container (Hidden initially) -->
-              <div id="desktopFilePreview" style="display: none; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; background-color: var(--surface-gray); align-items: center; justify-content: space-between; margin-top: 1.5rem;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <div style="width: 42px; height: 42px; border-radius: var(--radius-md); background-color: var(--primary-red-light); display: flex; align-items: center; justify-content: center; color: var(--primary-red);">
-                    <span class="material-icons">description</span>
-                  </div>
-                  <div>
-                    <h4 id="desktopFilename" style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">enrollment_data_q3.csv</h4>
-                    <p id="desktopFilesize" style="font-size: 0.75rem; color: var(--text-muted);">2.4 MB</p>
-                  </div>
-                </div>
-                <button id="desktopRemoveFileBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.color='var(--primary-red)'" onmouseout="this.style.color='var(--text-muted)'">
-                  <span class="material-icons">delete</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Right Sidebar Area (spans 4 columns) -->
-            <div class="side-panel-column" style="grid-column: span 4; gap: 1.5rem;">
-              
-              <!-- Destination Mapping Card -->
-              <div class="card" style="padding: 1.5rem;">
-                <h3 class="cancellations-title" style="margin-bottom: 0.5rem; font-size: 1rem;">Mapeamento de Destino</h3>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Selecione a tabela correta para garantir a correspondência das colunas.</p>
-                
-                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                  <!-- Option 1 -->
-                  <label class="mapping-option-label" style="display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 12px; cursor: pointer; transition: all 0.2s;">
-                    <input type="radio" name="dataset_type_desktop" checked style="margin-top: 3px; accent-color: var(--primary-red);">
-                    <div>
-                      <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 2px;">Matrículas & Alunos</span>
-                      <span style="font-size: 0.7rem; color: var(--text-muted); display: block; line-height: 1.3;">Atualiza a contagem de alunos por unidades da rede.</span>
-                    </div>
-                  </label>
-                  
-                  <!-- Option 2 -->
-                  <label class="mapping-option-label" style="display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 12px; cursor: pointer; transition: all 0.2s;">
-                    <input type="radio" name="dataset_type_desktop" style="margin-top: 3px; accent-color: var(--primary-red);">
-                    <div>
-                      <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 2px;">Pesquisas de NPS</span>
-                      <span style="font-size: 0.7rem; color: var(--text-muted); display: block; line-height: 1.3;">Importa scores e comentários de feedback dos clientes.</span>
-                    </div>
-                  </label>
-                  
-                  <!-- Option 3 -->
-                  <label class="mapping-option-label" style="display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 12px; cursor: pointer; transition: all 0.2s;">
-                    <input type="radio" name="dataset_type_desktop" style="margin-top: 3px; accent-color: var(--primary-red);">
-                    <div>
-                      <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 2px;">Auditorias (Cliente Oculto)</span>
-                      <span style="font-size: 0.7rem; color: var(--text-muted); display: block; line-height: 1.3;">Atualiza as notas operacionais e links das auditorias.</span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              <!-- Action Card -->
-              <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: flex-end; gap: 1rem;">
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">
-                  <input type="checkbox" style="accent-color: var(--primary-red);"> Sobrescrever registros para datas correspondentes
-                </label>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 10px;">
-                  <span class="material-icons" style="font-size: 18px;">sync</span> Processar Importação
-                </button>
-              </div>
-            </div>
-
-            <!-- Supporting Row Cards (grid-column span 6 each) -->
-            <!-- Formatting Guidelines Card -->
-            <div class="card" style="grid-column: span 6; display: flex; gap: 14px; align-items: flex-start;">
-              <span class="material-icons" style="color: var(--brand-yellow); font-size: 1.75rem;">lightbulb</span>
-              <div>
-                <h4 style="font-family: var(--font-headline); font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Diretrizes de Formatação</h4>
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.75rem;">Certifique-se de que seus arquivos CSV utilizam codificação UTF-8. A primeira linha deve conter exatamente os cabeçalhos de coluna suportados.</p>
-                <a href="#" class="nav-link" style="text-decoration: none; font-size: 0.75rem; color: var(--deep-blue-light); font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                  Download dos Templates <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Last Upload Status Card -->
-            <div class="card" style="grid-column: span 6; display: flex; gap: 14px; align-items: flex-start;">
-              <span class="material-icons" style="color: var(--success-green); font-size: 1.75rem;">check_circle</span>
-              <div>
-                <h4 style="font-family: var(--font-headline); font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Status do Último Envio</h4>
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.75rem;">O arquivo <code>enrollment_data_q2_final.xlsx</code> foi processado com sucesso ontem às 14:30.</p>
-                <div style="display: flex; gap: 8px;">
-                  <span style="font-size: 10px; font-weight: 700; color: var(--text-muted); background-color: var(--surface-gray); padding: 4px 10px; border-radius: var(--radius-sm);">2.450 Linhas</span>
-                  <span style="font-size: 10px; font-weight: 700; color: var(--success-green); background-color: var(--success-green-light); padding: 4px 10px; border-radius: var(--radius-sm);">0 Erros</span>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- End Desktop Grid -->
-
-          <!-- MOBILE WORKSPACE LAYOUT (Visible on Mobile) -->
-          <div class="mobile-featured-section">
-            
-            <!-- Mobile Header context -->
-            <div style="margin-bottom: 0.5rem;">
-              <h2 style="font-family: var(--font-headline); font-size: 1.5rem; font-weight: 700; color: var(--deep-blue-light);">Upload de Dados</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Importe listas de alunos, métricas de NPS ou dados financeiros para atualizar os dashboards em tempo real.</p>
-            </div>
-
-            <!-- Card 1: Nova Importação -->
-            <div class="card" style="position: relative; overflow: hidden; border-top: 4px solid var(--primary-red);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h4 class="nps-label" style="font-size: 0.75rem;">Nova Importação</h4>
-                <span class="material-icons" style="color: var(--deep-blue-light); font-size: 20px;">upload_file</span>
-              </div>
-
-              <!-- Mobile Dropzone -->
-              <div id="mobileDropzone" class="dropzone-area" style="border: 2px dashed var(--border-color); border-radius: var(--radius-md); padding: 2rem 1rem; text-align: center; background-color: var(--surface-gray); cursor: pointer; position: relative;">
-                <input type="file" id="mobileFileInput" accept=".csv, .xlsx" style="position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 10;">
-                <span class="material-icons" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 0.75rem;">cloud_upload</span>
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.3;">Toque para selecionar arquivo<br>ou arraste para cá</p>
-                <p style="font-size: 10px; color: var(--text-muted); font-weight: bold; margin-top: 6px;">CSV, XLSX (Max 10MB)</p>
-              </div>
-
-              <!-- Mobile File Preview (Hidden initially) -->
-              <div id="mobileFilePreview" style="display: none; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px; background-color: var(--surface-gray); align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <span class="material-icons" style="color: var(--primary-red); font-size: 24px;">description</span>
-                  <div>
-                    <h5 id="mobileFilename" style="font-size: 0.75rem; font-weight: 700; color: var(--text-main); margin-bottom: 1px;">nps_october.csv</h5>
-                    <p id="mobileFilesize" style="font-size: 0.65rem; color: var(--text-muted);">1.2 MB</p>
-                  </div>
-                </div>
-                <button id="mobileRemoveFileBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex;">
-                  <span class="material-icons" style="font-size: 20px;">delete</span>
-                </button>
-              </div>
-
-              <!-- Select Type Dropdown & Submit -->
-              <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.25rem;">
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                  <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Tipo de Dado</label>
-                  <select style="width: 100%; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 8px 10px; font-size: 0.8rem; color: var(--text-main); font-family: var(--font-body); font-weight: 600; background: var(--surface-white);">
-                    <option>Lista de Retenção - Alunos</option>
-                    <option>Resultados NPS Mensal</option>
-                    <option>Relatório de Eventos</option>
-                  </select>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 10px;">
-                  <span class="material-icons" style="font-size: 16px;">import_export</span> Importar Arquivo
-                </button>
-              </div>
-            </div>
-
-            <!-- Recent History Section -->
-            <h3 style="font-family: var(--font-headline); font-size: 1.15rem; font-weight: 700; color: var(--deep-blue); margin-top: 0.5rem; margin-bottom: -0.5rem;">Histórico Recente</h3>
-            
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              
-              <!-- Success Item -->
-              <div style="background-color: var(--surface-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--surface-gray); display: flex; align-items: center; justify-content: center; color: var(--deep-blue-light);">
-                    <span class="material-icons" style="font-size: 18px;">table_view</span>
-                  </div>
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">nps_outubro_2023.csv</h4>
-                    <p style="font-size: 0.7rem; color: var(--text-muted);">Hoje, 14:30 • 1.2MB</p>
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 3px; background-color: var(--success-green-light); color: var(--success-green); padding: 2px 8px; border-radius: var(--radius-sm);">
-                  <span class="material-icons" style="font-size: 12px;">check_circle</span>
-                  <span style="font-size: 9px; font-weight: bold; text-transform: uppercase;">Sucesso</span>
-                </div>
-              </div>
-
-              <!-- Pending Item -->
-              <div style="background-color: var(--surface-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px; display: flex; align-items: center; justify-content: space-between; opacity: 0.8;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--surface-gray); display: flex; align-items: center; justify-content: center; color: var(--deep-blue-light);">
-                    <span class="material-icons" style="font-size: 18px;">description</span>
-                  </div>
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">retencao_alunos_q3.xlsx</h4>
-                    <p style="font-size: 0.7rem; color: var(--text-muted);">Ontem, 09:15 • 4.5MB</p>
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 3px; background-color: var(--surface-gray); color: var(--text-muted); padding: 2px 8px; border-radius: var(--radius-sm);">
-                  <span class="material-icons spinner-icon" style="font-size: 12px;">sync</span>
-                  <span style="font-size: 9px; font-weight: bold; text-transform: uppercase;">Processando</span>
-                </div>
-              </div>
-
-              <!-- Error Item -->
-              <div style="background-color: var(--surface-white); border: 1px solid var(--error-red-light); border-radius: var(--radius-md); padding: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--error-red-light); display: flex; align-items: center; justify-content: center; color: var(--error-red);">
-                    <span class="material-icons" style="font-size: 18px;">error</span>
-                  </div>
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px; text-decoration: line-through; opacity: 0.6;">eventos_roi_falha.csv</h4>
-                    <p style="font-size: 0.7rem; color: var(--error-red); font-weight: 600;">Erro na linha 42</p>
-                  </div>
-                </div>
-                <button style="background: none; border: none; color: var(--deep-blue-light); cursor: pointer; padding: 6px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
-                  <span class="material-icons" style="font-size: 18px;">refresh</span>
-                </button>
-              </div>
-
-            </div>
-          </div> <!-- End Mobile Layout -->
-
-        </div> <!-- End View Data -->
-
-      </div>
-    </main>
-
-    <!-- BottomNavBar (Mobile) -->
-    <nav class="mobile-nav">
-      <a href="#" class="mobile-nav-item active" data-target="view-home">
-        <span class="material-icons">home</span>
-        Home
-      </a>
-      <a href="#" class="mobile-nav-item" data-target="view-retention">
-        <span class="material-icons">menu_book</span>
-        Pedagógico
-      </a>
-      <a href="#" class="mobile-nav-item" data-target="view-events">
-        <span class="material-icons">campaign</span>
-        Eventos
-      </a>
-      <a href="#" class="mobile-nav-item" data-target="view-nps">
-        <span class="material-icons">star</span>
-        NPS
-      </a>
-      <a href="#" class="mobile-nav-item" data-target="view-data">
-        <span class="material-icons">cloud_upload</span>
-        Upload
-      </a>
-    </nav>
-
-  </div> <!-- End App Shell -->
-
-  <!-- JS Link -->
-  <script src="app.js"></script>
+        </form>
+        <!-- Help Link -->
+        <div class="mt-8 text-center">
+            <p class="font-body-md text-body-md text-text-muted text-sm">
+                Problemas com o acesso? <a class="text-data-blue hover:underline" href="#">Contate o suporte de TI</a>
+            </p>
+        </div>
+    </div>
+    <!-- Subtle background decorative elements -->
+    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-data-blue/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 rounded-full bg-data-red/5 blur-3xl pointer-events-none"></div>
 </body>
 </html>

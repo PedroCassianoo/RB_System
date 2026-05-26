@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
           mobileHeaderTitle.textContent = 'Experiência & NPS';
         } else if (targetId === 'view-data') {
           mobileHeaderTitle.textContent = 'Gestão de Dados';
+        } else if (targetId === 'view-farmers-2026') {
+          mobileHeaderTitle.textContent = "Farmer's Market 2026";
         } else {
           mobileHeaderTitle.textContent = 'Red Balloon';
         }
@@ -61,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         triggerEventsAnimations();
       } else if (targetId === 'view-nps') {
         triggerNpsAnimations();
+      } else if (targetId === 'view-farmers-2026') {
+        triggerFarmers2026Animations();
       }
     });
   });
@@ -306,3 +310,20 @@ function formatBytes(bytes, decimals = 1) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+/**
+ * Animate elements on the Farmer's Market 2026 view
+ */
+function triggerFarmers2026Animations() {
+  animateHorizontalBar('fm-bar-k1', 7);
+  animateHorizontalBar('fm-bar-k2', 86);
+  animateHorizontalBar('fm-bar-j', 100);
+  animateHorizontalBar('fm-bar-j1', 71);
+  animateHorizontalBar('fm-bar-j2', 79);
+  animateHorizontalBar('fm-bar-t1', 71);
+  animateHorizontalBar('fm-bar-t2', 29);
+  animateHorizontalBar('fm-bar-t3', 21);
+  animateHorizontalBar('fm-bar-t4', 14);
+  animateHorizontalBar('fm-bar-t5', 0);
+  animateHorizontalBar('fm-bar-t6', 0);
+  animateHorizontalBar('fm-bar-leads', 21);
+}
