@@ -1200,3 +1200,177 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* ============================================================== */
+/* SUB-TABS (EVENTOS 2026) IN SIDEBAR STYLES                      */
+/* ============================================================== */
+
+.sidebar-submenu {
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+/* Expand sub-menu when the parent Eventos 2026 tab is active */
+.nav-item[data-target="view-events"].active + .sidebar-submenu,
+.sidebar-submenu.active {
+  display: flex;
+}
+
+.nav-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.825rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.nav-sub-item:hover {
+  color: var(--text-white);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-sub-item.active {
+  color: var(--brand-yellow);
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--brand-yellow);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sub-views wrapper */
+.subview-section {
+  display: none;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.subview-section.active {
+  display: block;
+}
+
+/* ============================================================== */
+/* SEGMENTED CONTROL (SUB-TABS EVENTOS) STYLES                    */
+/* ============================================================== */
+
+.segmented-control {
+  display: flex;
+  background-color: var(--surface-gray);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  margin-bottom: 2rem;
+  width: max-content;
+}
+
+.segmented-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.segmented-control-btn:hover {
+  color: var(--deep-blue-light);
+}
+
+.segmented-control-btn.active {
+  background-color: var(--surface-white);
+  color: var(--deep-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================== */
+/* SHshared BOX UTILITY CLASSES (FOR DESIGN SYSTEM)               */
+/* ============================================================== */
+
+.box-highlight-gray {
+  background-color: var(--surface-gray);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.box-highlight-gray.accent-blue {
+  border-left: 4px solid var(--deep-blue-light);
+}
+
+.box-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.box-heading.text-blue {
+  color: var(--deep-blue);
+}
+
+.box-heading.text-blue-light {
+  color: var(--deep-blue-light);
+}
+
+.box-heading.text-red {
+  color: var(--primary-red);
+}
+
+.box-heading.text-yellow {
+  color: var(--brand-yellow);
+}
+
+.box-heading.text-main {
+  color: var(--text-main);
+}
+
+.box-metric {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.box-metric.text-blue {
+  color: var(--deep-blue-light);
+}
+
+.box-metric.text-red {
+  color: var(--primary-red);
+}
+
+.box-metric.text-yellow {
+  color: var(--brand-yellow);
+}
+
+.box-metric.text-main {
+  color: var(--text-main);
+  font-size: 1.25rem;
+}
+
+.box-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}

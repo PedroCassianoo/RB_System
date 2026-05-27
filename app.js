@@ -1,3 +1,11 @@
+// Global debug configuration
+const DEBUG = false;
+function debugLog(...args) {
+  if (DEBUG) {
+    console.log(...args);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Home animations on first load
   triggerHomeAnimations();
@@ -14,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!targetId) return; // Ignore buttons with no targets (e.g. Sair, Configurações)
 
       e.preventDefault();
+      debugLog('Tab navigation triggered. Target view ID:', targetId);
 
       // Update active states across ALL corresponding navigation links (Desktop and Mobile in sync)
       allNavLinks.forEach(item => {
@@ -28,9 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Switch Visible Views
       const allViews = document.querySelectorAll('.view-section');
+      debugLog('Total views found:', allViews.length);
       allViews.forEach(view => {
         if (view.id === targetId) {
           view.classList.add('active');
+          debugLog('Activated view:', view.id);
         } else {
           view.classList.remove('active');
         }
@@ -42,13 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetId === 'view-retention') {
           mobileHeaderTitle.textContent = 'Retention';
         } else if (targetId === 'view-events') {
-          mobileHeaderTitle.textContent = 'Eventos & ROI';
+          mobileHeaderTitle.textContent = 'Eventos 2026';
         } else if (targetId === 'view-nps') {
           mobileHeaderTitle.textContent = 'Experiência & NPS';
         } else if (targetId === 'view-data') {
           mobileHeaderTitle.textContent = 'Gestão de Dados';
-        } else if (targetId === 'view-farmers-2026') {
-          mobileHeaderTitle.textContent = "Farmer's Market 2026";
         } else {
           mobileHeaderTitle.textContent = 'Red Balloon';
         }
@@ -63,9 +72,79 @@ document.addEventListener('DOMContentLoaded', () => {
         triggerEventsAnimations();
       } else if (targetId === 'view-nps') {
         triggerNpsAnimations();
-      } else if (targetId === 'view-farmers-2026') {
-        triggerFarmers2026Animations();
       }
+
+      // Toggle events sidebar submenu expansion based on active main tab
+      const eventsSubmenu = document.getElementById('events-submenu');
+      if (eventsSubmenu) {
+        if (targetId === 'view-events') {
+          eventsSubmenu.classList.add('active');
+          // Reset subtabs to overview by default when navigating to events view
+          switchEventsSubtab('events-subview-overview');
+        } else {
+          eventsSubmenu.classList.remove('active');
+        }
+      }
+    });
+  });
+
+  // Centralized function to switch subviews inside Eventos 2026 (keeps sidebar and segmented control in sync)
+  function switchEventsSubtab(subtargetId) {
+    // Update active state of sidebar sub-menu items
+    const subtabLinks = document.querySelectorAll('.nav-sub-item');
+    subtabLinks.forEach(item => {
+      if (item.getAttribute('data-subtarget') === subtargetId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    // Update active state of segmented control buttons
+    const segmentedBtns = document.querySelectorAll('.segmented-control-btn');
+    segmentedBtns.forEach(item => {
+      if (item.getAttribute('data-subtarget') === subtargetId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    // Toggle visible subviews
+    const allSubviews = document.querySelectorAll('.subview-section');
+    allSubviews.forEach(subview => {
+      if (subview.id === subtargetId) {
+        subview.classList.add('active');
+      } else {
+        subview.classList.remove('active');
+      }
+    });
+
+    // Trigger sub-view animations
+    if (subtargetId === 'events-subview-farmers') {
+      triggerFarmers2026Animations();
+    } else if (subtargetId === 'events-subview-overview') {
+      triggerEventsAnimations();
+    }
+  }
+
+  // Sidebar sub-tabs switching routing logic (inside Eventos 2026)
+  const subtabLinks = document.querySelectorAll('.nav-sub-item');
+  subtabLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const subtargetId = link.getAttribute('data-subtarget');
+      if (subtargetId) switchEventsSubtab(subtargetId);
+    });
+  });
+
+  // Segmented control sub-tabs switching routing logic (inside Eventos 2026)
+  const segmentedBtns = document.querySelectorAll('.segmented-control-btn');
+  segmentedBtns.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const subtargetId = link.getAttribute('data-subtarget');
+      if (subtargetId) switchEventsSubtab(subtargetId);
     });
   });
 });

@@ -107,9 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alertContainer.innerHTML = `
             <div class="flex items-center">
                 <span class="material-symbols-outlined mr-2 text-[20px]">error</span>
-                <span>${message}</span>
+                <span class="alert-message"></span>
             </div>
         `;
+        alertContainer.querySelector(".alert-message").textContent = message;
     }
 
     function showSuccess(message) {
@@ -118,9 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alertContainer.innerHTML = `
             <div class="flex items-center">
                 <span class="material-symbols-outlined mr-2 text-[20px]">check_circle</span>
-                <span>${message}</span>
+                <span class="alert-message"></span>
             </div>
         `;
+        alertContainer.querySelector(".alert-message").textContent = message;
     }
 
     function hideAlert() {

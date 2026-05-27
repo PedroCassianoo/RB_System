@@ -1,9 +1,31 @@
 // Script para criar um usuário de teste no Supabase usando a API GoTrue nativa
-const SUPABASE_URL = "https://vstopjzwoxvjuybyjcto.supabase.co";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzdG9wanp3b3h2anV5YnlqY3RvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NDM1MzgsImV4cCI6MjA5NTMxOTUzOH0.JsswG4K0R1Q1PUYo3UFa-B9Zd2bduGBLp7-9d-jFsQI";
+const fs = require('fs');
+const path = require('path');
 
-const email = "test@redballoon.com.br";
-const password = "Password123!";
+// Carregar variáveis do arquivo .env local de forma nativa
+try {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const envConfig = fs.readFileSync(envPath, 'utf8');
+    envConfig.split(/\r?\n/).forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) return;
+      const parts = trimmed.split('=');
+      if (parts.length >= 2) {
+        const key = parts[0].trim();
+        const value = parts.slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+        if (key) process.env[key] = value;
+      }
+    });
+  }
+} catch (e) {
+  console.warn("Aviso: Falha ao carregar o arquivo .env:", e.message);
+}
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const email = process.env.TEST_EMAIL;
+const password = process.env.TEST_PASSWORD;
 
 async function createTestUser() {
   console.log(`Tentando cadastrar o usuário: ${email}...`);

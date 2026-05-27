@@ -1,0 +1,6 @@
+# Security: local environment variables
+.env
+
+# Temp files
+*.txt
+*.log
