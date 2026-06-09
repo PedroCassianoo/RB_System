@@ -13,6 +13,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Drag and Drop Upload Handlers (Phase 5)
   initDataUploadHandlers();
 
+  // Initialize main YTD chart tooltips
+  initChartTooltips();
+
+  // Slide Drawer Toggle Logic
+  const menuTrigger = document.querySelector('.menu-trigger');
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+  if (menuTrigger && sidebar && sidebarOverlay) {
+    menuTrigger.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('active');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    });
+  }
+
   // Tab switching routing logic - select all elements with data-target
   const allNavLinks = document.querySelectorAll('[data-target]');
 
@@ -85,6 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
           eventsSubmenu.classList.remove('active');
         }
       }
+
+      // Close mobile drawer on item selection
+      if (sidebar && sidebarOverlay) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+      }
     });
   });
 
@@ -126,6 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (subtargetId === 'events-subview-overview') {
       triggerEventsAnimations();
     }
+
+    // Close mobile drawer on item selection
+    if (sidebar && sidebarOverlay) {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    }
   }
 
   // Sidebar sub-tabs switching routing logic (inside Eventos 2026)
@@ -153,25 +185,20 @@ document.addEventListener('DOMContentLoaded', () => {
  * Animate elements on the Home/Visão Geral view
  */
 function triggerHomeAnimations() {
+  animateCircularGauge('npsGauge', 82);
   animateCircularGauge('desktopNpsGauge', 82);
-  animateCircularGauge('mobileNpsGauge', 78);
 }
 
 /**
  * Animate elements on the Retention/Insights view
  */
 function triggerRetentionAnimations() {
-  // Desktop Pareto Progress Bars
+  // Pareto Progress Bars
   animateHorizontalBar('pbar1', 45);
   animateHorizontalBar('pbar2', 25);
   animateHorizontalBar('pbar3', 15);
   animateHorizontalBar('pbar4', 10);
   animateHorizontalBar('pbar5', 5);
-
-  // Mobile Reason Bars
-  animateHorizontalBar('mbar1', 45);
-  animateHorizontalBar('mbar2', 30);
-  animateHorizontalBar('mbar3', 15);
 
   // Table Risk Progress Bars
   animateHorizontalBar('rbar1', 85);
@@ -183,13 +210,15 @@ function triggerRetentionAnimations() {
  * Animate elements on the Events & ROI view
  */
 function triggerEventsAnimations() {
-  // Desktop ROI Bars
+  // ROI Bars
   animateHorizontalBar('roibar1', 94);
   animateHorizontalBar('roibar2', 72);
 
-  // Mobile Event Funnel RSVP/Attended Bars
-  animateHorizontalBar('mevent1', 70);
-  animateHorizontalBar('mevent2', 60);
+  // Historical Trend Bars
+  animateHorizontalBar('hist-receita-bar', 100);
+  animateHorizontalBar('hist-part-bar', 100);
+  animateHorizontalBar('hist-ret1-bar', 100);
+  animateHorizontalBar('hist-ret2-bar', 100);
 }
 
 /**
@@ -233,10 +262,10 @@ function animateHorizontalBar(elementId, percent) {
  * Animate elements on the Experiência & NPS view (Phase 4)
  */
 function triggerNpsAnimations() {
-  // Desktop Circular Gauge Aderência
+  // Circular Gauge Aderência
   animateCircularGauge('adherenceGauge', 85);
 
-  // Desktop Stacked Columns (Historical NPS)
+  // Stacked Columns (Historical NPS)
   animateVerticalBar('npsbar1', 60);
   animateVerticalBar('npsbar2', 65);
   animateVerticalBar('npsbar3', 62);
@@ -244,16 +273,10 @@ function triggerNpsAnimations() {
   animateVerticalBar('npsbar5', 78);
   animateVerticalBar('npsbar6', 82);
 
-  // Desktop Categories Progress Bars
+  // Categories Progress Bars
   animateHorizontalBar('catbar1', 92);
   animateHorizontalBar('catbar2', 88);
   animateHorizontalBar('catbar3', 75);
-
-  // Mobile Column Bars (Jan-Abr)
-  animateVerticalBar('mnpsbar1', 60);
-  animateVerticalBar('mnpsbar2', 65);
-  animateVerticalBar('mnpsbar3', 70);
-  animateVerticalBar('mnpsbar4', 85);
 }
 
 /**
@@ -284,14 +307,6 @@ function initDataUploadHandlers() {
   const desktopFilesize = document.getElementById('desktopFilesize');
   const desktopRemoveFileBtn = document.getElementById('desktopRemoveFileBtn');
 
-  // Mobile elements
-  const mobileDropzone = document.getElementById('mobileDropzone');
-  const mobileFileInput = document.getElementById('mobileFileInput');
-  const mobileFilePreview = document.getElementById('mobileFilePreview');
-  const mobileFilename = document.getElementById('mobileFilename');
-  const mobileFilesize = document.getElementById('mobileFilesize');
-  const mobileRemoveFileBtn = document.getElementById('mobileRemoveFileBtn');
-
   // Setup desktop dropzone events
   if (desktopDropzone && desktopFileInput) {
     setupDropzoneEvents(desktopDropzone, desktopFileInput, (file) => {
@@ -302,16 +317,6 @@ function initDataUploadHandlers() {
     });
   }
 
-  // Setup mobile dropzone events
-  if (mobileDropzone && mobileFileInput) {
-    setupDropzoneEvents(mobileDropzone, mobileFileInput, (file) => {
-      mobileDropzone.style.display = 'none';
-      mobileFilePreview.style.display = 'flex';
-      mobileFilename.textContent = file.name;
-      mobileFilesize.textContent = formatBytes(file.size);
-    });
-  }
-
   // Desktop remove button
   if (desktopRemoveFileBtn) {
     desktopRemoveFileBtn.addEventListener('click', (e) => {
@@ -319,16 +324,6 @@ function initDataUploadHandlers() {
       desktopFileInput.value = ''; // Reset input
       desktopFilePreview.style.display = 'none';
       desktopDropzone.style.display = 'block';
-    });
-  }
-
-  // Mobile remove button
-  if (mobileRemoveFileBtn) {
-    mobileRemoveFileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mobileFileInput.value = ''; // Reset input
-      mobileFilePreview.style.display = 'none';
-      mobileDropzone.style.display = 'block';
     });
   }
 }
@@ -393,16 +388,77 @@ function formatBytes(bytes, decimals = 1) {
  * Animate elements on the Farmer's Market 2026 view
  */
 function triggerFarmers2026Animations() {
-  animateHorizontalBar('fm-bar-k1', 7);
-  animateHorizontalBar('fm-bar-k2', 86);
-  animateHorizontalBar('fm-bar-j', 100);
-  animateHorizontalBar('fm-bar-j1', 71);
-  animateHorizontalBar('fm-bar-j2', 79);
-  animateHorizontalBar('fm-bar-t1', 71);
-  animateHorizontalBar('fm-bar-t2', 29);
-  animateHorizontalBar('fm-bar-t3', 21);
-  animateHorizontalBar('fm-bar-t4', 14);
-  animateHorizontalBar('fm-bar-t5', 0);
-  animateHorizontalBar('fm-bar-t6', 0);
-  animateHorizontalBar('fm-bar-leads', 21);
+  animateHorizontalBar('fm-bar-k1', 1.4 * 5);
+  animateHorizontalBar('fm-bar-k2', 17.1 * 5);
+  animateHorizontalBar('fm-bar-j', 20 * 5);
+  animateHorizontalBar('fm-bar-j1', 14.3 * 5);
+  animateHorizontalBar('fm-bar-j2', 15.7 * 5);
+  animateHorizontalBar('fm-bar-t1', 14.3 * 5);
+  animateHorizontalBar('fm-bar-t2', 5.7 * 5);
+  animateHorizontalBar('fm-bar-t3', 4.3 * 5);
+  animateHorizontalBar('fm-bar-t4', 2.9 * 5);
+  animateHorizontalBar('fm-bar-t5', 0 * 5);
+  animateHorizontalBar('fm-bar-t6', 0 * 5);
+  animateHorizontalBar('fm-bar-leads', 4.3 * 5);
 }
+
+/**
+ * Initialize tooltips on the YTD Growth line chart
+ */
+function initChartTooltips() {
+  const points = document.querySelectorAll('.chart-point');
+  const tooltip = document.getElementById('chart-tooltip');
+  if (!points.length || !tooltip) return;
+
+  points.forEach(point => {
+    point.addEventListener('mouseenter', (e) => {
+      const month = point.getAttribute('data-month');
+      const entered = point.getAttribute('data-in');
+      const exited = point.getAttribute('data-out');
+      const total = point.getAttribute('data-total');
+
+      tooltip.innerHTML = `
+        <div style="font-weight: 700; color: var(--brand-yellow); margin-bottom: 6px; font-size: 0.8rem;">${month}</div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 4px;">
+          <span style="color: rgba(255,255,255,0.7);">Entradas:</span>
+          <span style="color: var(--success-green); font-weight: 700;">+${entered}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+          <span style="color: rgba(255,255,255,0.7);">Saídas:</span>
+          <span style="color: var(--primary-red); font-weight: 700;">-${exited}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-weight: 700; font-size: 0.8rem;">
+          <span>Total:</span>
+          <span style="color: var(--text-white);">${total}</span>
+        </div>
+      `;
+      tooltip.style.display = 'block';
+    });
+
+    point.addEventListener('mousemove', (e) => {
+      const container = tooltip.parentElement;
+      const rect = container.getBoundingClientRect();
+      
+      // Calculate cursor position relative to container
+      let x = e.clientX - rect.left + 15;
+      let y = e.clientY - rect.top - 85;
+
+      // Tooltip bounds check
+      const tooltipWidth = tooltip.offsetWidth;
+      if (x + tooltipWidth > rect.width) {
+        x = e.clientX - rect.left - tooltipWidth - 15;
+      }
+      if (y < 0) {
+        y = e.clientY - rect.top + 15;
+      }
+
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
+    });
+
+    point.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+  });
+}
+

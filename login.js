@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const { createClient } = window.supabase;
     const supabase = createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
 
+    // Redirecionar para o dashboard se já estiver autenticado
+    supabase.auth.getSession().then(({ data }) => {
+        if (data && data.session) {
+            window.location.href = "dashboard.html";
+        }
+    });
+
     // 3. Obter elementos da DOM
     const loginForm = document.getElementById("login-form");
     const emailInput = document.getElementById("email");
