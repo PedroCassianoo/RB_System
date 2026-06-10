@@ -161,7 +161,7 @@
                 <h3>Alunos Matriculados</h3>
                 <span class="material-icons kpi-icon">school</span>
               </div>
-              <div class="kpi-value">194</div>
+              <div class="kpi-value" id="db-enrolled-students">194</div>
               <div class="kpi-trend trend-up">
                 <span class="material-icons" style="font-size: 16px;">trending_up</span>
                 <span>+10% vs. ano anterior</span>
@@ -174,7 +174,7 @@
                 <h3>Novas Matrículas</h3>
                 <span class="material-icons kpi-icon">person_add</span>
               </div>
-              <div class="kpi-value">30</div>
+              <div class="kpi-value" id="db-new-enrollments">30</div>
               <div class="kpi-trend trend-up">
                 <span class="material-icons" style="font-size: 16px;">trending_up</span>
                 <span>+12% vs. ano anterior</span>
@@ -187,7 +187,7 @@
                 <h3>Receita Prevista</h3>
                 <span class="material-icons kpi-icon">attach_money</span>
               </div>
-              <div class="kpi-value">R$ 2.3M</div>
+              <div class="kpi-value" id="db-predicted-revenue">R$ 2.3M</div>
               <div class="kpi-trend trend-up">
                 <span class="material-icons" style="font-size: 16px;">trending_up</span>
                 <span>+9% vs. ano anterior</span>
@@ -312,8 +312,8 @@
                     <circle class="gauge-fill" cx="80" cy="80" r="70" id="npsGauge" style="stroke: var(--deep-blue-light);" />
                   </svg>
                   <div class="gauge-center-text">
-                    <span class="nps-score">82</span>
-                    <span class="nps-label">Excelente</span>
+                    <span class="nps-score" id="db-nps-score">82</span>
+                    <span class="nps-label" id="db-nps-label">Excelente</span>
                   </div>
                 </div>
                 <div class="gauge-legend">
@@ -408,7 +408,7 @@
                 <h3>Taxa de Retenção</h3>
                 <span class="material-icons kpi-icon">analytics</span>
               </div>
-              <div class="kpi-value">92.4%</div>
+              <div class="kpi-value" id="db-retention-rate">92.4%</div>
               <div class="kpi-trend trend-up">
                 <span class="material-icons" style="font-size: 16px;">trending_up</span>
                 <span>+1.2% vs. período anterior</span>
@@ -421,7 +421,7 @@
                 <h3>Cancelamentos (Mês)</h3>
                 <span class="material-icons kpi-icon">trending_down</span>
               </div>
-              <div class="kpi-value">47</div>
+              <div class="kpi-value" id="db-month-cancellations">47</div>
               <div class="kpi-trend trend-down">
                 <span class="material-icons" style="font-size: 16px;">trending_up</span>
                 <span>+5 vs. mês anterior</span>
@@ -434,7 +434,7 @@
                 <h3>Risco Alto Detectado</h3>
                 <span class="material-icons kpi-icon">warning</span>
               </div>
-              <div class="kpi-value">18</div>
+              <div class="kpi-value" id="db-high-risk">18</div>
               <div class="kpi-trend trend-neutral">
                 <span>Alunos mapeados</span>
               </div>
@@ -565,7 +565,7 @@
                       <th style="text-align: right;">Ações</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="db-pedagogical-tbody">
                     <tr>
                       <td>
                         <strong style="color: var(--text-main); display: block;">Teens 3 - Sáb 09h</strong>
@@ -708,15 +708,15 @@
                   <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 0.75rem;">
                     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
                       <span>Receita gerada pelo evento:</span>
-                      <span style="color: var(--text-main);">R$ 8.000</span>
+                      <span style="color: var(--text-main);" id="ev-revenue">R$ 8.000</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
                       <span>Custo total do evento:</span>
-                      <span style="color: var(--text-main);">R$ 10.000</span>
+                      <span style="color: var(--text-main);" id="ev-cost">R$ 10.000</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
                       <span>Lucro líquido:</span>
-                      <span style="color: var(--primary-red); font-weight: 700;">-R$ 2.000</span>
+                      <span style="color: var(--primary-red); font-weight: 700;" id="ev-profit">-R$ 2.000</span>
                     </div>
                   </div>
                 </div>
@@ -724,7 +724,7 @@
                   <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">ROI:</span>
                   <div class="kpi-trend trend-down" style="margin-top: 0; font-size: 0.95rem; font-weight: bold; background-color: var(--error-red-light); padding: 2px 8px; border-radius: var(--radius-sm);">
                     <span class="material-icons" style="font-size: 16px;">trending_down</span>
-                    <span>-20%</span>
+                    <span id="ev-roi-pct">-20%</span>
                   </div>
                 </div>
               </div>
@@ -737,7 +737,7 @@
                     <span class="material-icons kpi-icon">groups</span>
                   </div>
                   <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 0.75rem;">
-                    <span class="kpi-value" style="font-size: 2.25rem; color: var(--text-main);">36.5%</span>
+                    <span class="kpi-value" style="font-size: 2.25rem; color: var(--text-main);" id="ev-engagement-pct">36.5%</span>
                     <span style="font-size: 0.75rem; color: var(--success-green); font-weight: 700;">Adesão da base</span>
                   </div>
                   <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
@@ -747,12 +747,12 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
                       <span style="font-weight: 600;">Inscritos no Evento:</span>
-                      <span style="color: var(--text-main); font-weight: 700;">36.5% (70 confirmados)</span>
+                      <span style="color: var(--text-main); font-weight: 700;" id="ev-enrolled-count">36.5% (70 confirmados)</span>
                     </div>
                   </div>
                 </div>
               </div>
-
+ 
               <!-- KPI 3: Nota -->
               <div class="card kpi-card yellow-accent" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
                 <div>
@@ -760,7 +760,7 @@
                     <h3>Nota</h3>
                     <span class="material-icons kpi-icon">sentiment_very_satisfied</span>
                   </div>
-                  <div class="kpi-value" style="font-size: 2.25rem; color: var(--text-main); line-height: 1.1;">4.8</div>
+                  <div class="kpi-value" style="font-size: 2.25rem; color: var(--text-main); line-height: 1.1;" id="ev-rating">4.8</div>
                   <div class="star-rating" style="margin-top: 0.25rem; gap: 2px; color: var(--brand-yellow);">
                     <span class="material-icons" style="font-size: 1.15rem;">star</span>
                     <span class="material-icons" style="font-size: 1.15rem;">star</span>
@@ -770,7 +770,7 @@
                   </div>
                 </div>
                 <div style="border-top: 1px solid var(--border-color); padding-top: 0.5rem; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-                  <span>12 respostas</span>
+                  <span id="ev-responses-count">12 respostas</span>
                 </div>
               </div>
 
@@ -1396,7 +1396,7 @@
                   <span class="material-icons" style="color: var(--primary-red); font-size: 16px;">edit_note</span>
                   <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em;">Destaque do Auditor</span>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; font-style: italic;">
+                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; font-style: italic;" id="db-auditor-note">
                   "A equipe de recepção foi extremamente cordial, mas notou-se hesitação na explicação dos novos pacotes corporativos. A área de espera estava impecável."
                 </p>
               </div>
